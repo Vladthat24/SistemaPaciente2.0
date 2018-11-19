@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author CARLOS
  */
-public class fh_paciente {
+public class fhistoria_clin {
 
     private conexion mysql = new conexion();
     private Connection cn = mysql.conectar();

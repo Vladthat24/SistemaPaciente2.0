@@ -6,7 +6,7 @@
 package Presentacion;
 
 import Datos.vtrabajador;
-import Logica.fh_paciente;
+import Logica.fhistoria_clin;
 import Logica.ftrabajador;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

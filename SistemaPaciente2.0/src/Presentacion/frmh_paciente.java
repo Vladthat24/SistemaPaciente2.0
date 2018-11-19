@@ -7,7 +7,7 @@ package Presentacion;
 
 import Datos.vh_paciente;
 import Logica.conexion;
-import Logica.fh_paciente;
+import Logica.fhistoria_clin;
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -80,7 +80,7 @@ public class frmh_paciente extends javax.swing.JInternalFrame {
         }
 
         vh_paciente dts = new vh_paciente();
-        fh_paciente func = new fh_paciente();
+        fhistoria_clin func = new fhistoria_clin();
 
         dts.setHistoria_clinica(txthistoria_clinica.getText());
         dts.setNombre(txtnombre.getText());
@@ -278,7 +278,7 @@ public class frmh_paciente extends javax.swing.JInternalFrame {
     void mostrar(String buscar) {
         try {
             DefaultTableModel modelo;
-            fh_paciente func = new fh_paciente();
+            fhistoria_clin func = new fhistoria_clin();
             modelo = func.mostrar(buscar);
 
             tablalistado.setModel(modelo);
@@ -951,7 +951,7 @@ public class frmh_paciente extends javax.swing.JInternalFrame {
             int confirmacion = JOptionPane.showConfirmDialog(rootPane, "Estás seguro de Eliminar el paciente?", "Confirmar", 2);
 
             if (confirmacion == 0) {
-                fh_paciente func = new fh_paciente();
+                fhistoria_clin func = new fhistoria_clin();
                 vh_paciente dts = new vh_paciente();
 
                 dts.setIdpersona(Integer.parseInt(txtidpersona.getText()));
