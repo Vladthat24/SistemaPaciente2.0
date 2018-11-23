@@ -30,22 +30,20 @@ public class facceso {
     public DefaultTableModel mostrar(String buscar) {
         DefaultTableModel modelo;
 
-        String[] titulos = {"ID", "Acceso", "idTrabajador","trabajador","login", "Password","Estado"};
+        String[] titulos = {"ID", "Acceso", "idTrabajador", "trabajador", "login", "Password", "Estado"};
 
         String[] registro = new String[7];
 
         totalregistros = 0;
         modelo = new DefaultTableModel(null, titulos);
-        sSQL = "select idacceso,acceso,idtrabajador,login,password,estado from acceso where idtrabajador IN (select nombre from persona_trabajador where idtrabajador=idtrabajador)";
-          
-        
+//        sSQL = "select idacceso,acceso,idtrabajador,login,password,estado from acceso where idtrabajador IN (select nombre from persona_trabajador where idtrabajador=idtrabajador)";
+
         sSQL = "select idacceso,acceso,idtrabajador,"
-                + "(select nombre from persona_trabajador where idptrabajador=idtrabajador) as trabajadornombre,"
-                + "(select apaterno from persona_trabajador where idptrabajador=idtrabajador) as trabajadorapellidop,"
+                + "(select nombre from trabajador where idptrabajador=idtrabajador) as trabajadornombre,"
+                + "(select apellidos from trabajador where idptrabajador=idtrabajador) as trabajadoapellidos,"
                 + "login,password,estado from acceso where login like '%" + buscar + "%' order by idacceso desc";
 
 //SELECT nombrepla FROM plataformas WHERE idpla IN (SELECT idpla FROM notpla WHERE id_not='6')
-
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
@@ -54,11 +52,10 @@ public class facceso {
                 registro[0] = rs.getString("idacceso");
                 registro[1] = rs.getString("acceso");
                 registro[2] = rs.getString("idtrabajador");
-                registro[3] = rs.getString("trabajadornombre")+ "  " +rs.getString("trabajadorapellidop");
+                registro[3] = rs.getString("trabajadornombre") + "  " + rs.getString("trabajadorapellidos");
                 registro[4] = rs.getString("login");
                 registro[5] = rs.getString("password");
                 registro[6] = rs.getString("estado");
-              
 
                 totalregistros = totalregistros + 1;
                 modelo.addRow(registro);
@@ -98,7 +95,7 @@ public class facceso {
             }
 
         } catch (Exception e) {
-            JOptionPane.showConfirmDialog(null, e +"error 02 facceso");
+            JOptionPane.showConfirmDialog(null, e + "error 02 facceso");
             return false;
         }
     }
@@ -116,7 +113,6 @@ public class facceso {
             pst.setString(4, dts.getLogin());
             pst.setString(5, dts.getPassword());
             pst.setString(6, dts.getEstado());
-
 
             int n = pst.executeUpdate();
 
@@ -157,36 +153,42 @@ public class facceso {
             return false;
         }
     }
-    
-  public DefaultTableModel login (String login, String password){
-      DefaultTableModel modelo;
-      String [] titulos = {"ID", "Acceso","Login","Password","Estado"};
-      String [] registros = new String[5];
-      
-      totalregistros=0;
-      
-      modelo = new DefaultTableModel(null, titulos);
-      
-      sSQL="select idacceso,acceso,login,password,estado from acceso where login='"
-              +login+"'and password='"+password+"' and estado='A'";
-      try {
-          Statement st = cn.createStatement();
-          ResultSet rs = st.executeQuery(sSQL);
-          
-          while(rs.next()){
-              registros[0] = rs.getString("idacceso");
-              registros[1] = rs.getString("acceso");
-              registros[2] = rs.getString("login");
-              registros[3] = rs.getString("password");
-              registros[4] = rs.getString("estado");
-              
-              totalregistros=totalregistros+1;
-              modelo.addRow(registros);
-          }
-          return modelo;
-      } catch (Exception e) {
-          JOptionPane.showConfirmDialog(null, e +"error login facceso");
-          return null;
-      }
-  }
+
+    public DefaultTableModel login(String login, String password) {
+        DefaultTableModel modelo;
+        String[] titulos = {"ID", "Acceso", "Login", "Password", "Estado"};
+        String[] registros = new String[5];
+
+        totalregistros = 0;
+
+        modelo = new DefaultTableModel(null, titulos);
+
+//      sSQL="select idacceso,acceso,login,password,estado from acceso where login='"
+//              +login+"'and password='"+password+"' and estado='A'";
+        sSQL = "SELECT idacceso,idtrabajador,"
+                + "(select nombre from persona_trabajador where idptrabajador=idtrabajador) as nombretrab,"
+                + "(select apaterno from persona_trabajador where idptrabajador=idtrabajador)as apellidos,"
+                + "acceso,login,password,estado from acceso where login='" + login + "' and password='" + password + "' and estado='A'";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+
+            while (rs.next()) {
+                registros[0] = rs.getString("idacceso");
+                registros[1] = rs.getString("idtrabajador");
+                registros[2]= rs.getString("nombretrab")+" "+rs.getString("apellidos");
+                registros[1] = rs.getString("acceso");
+                registros[2] = rs.getString("login");
+                registros[3] = rs.getString("password");
+                registros[4] = rs.getString("estado");
+
+                totalregistros = totalregistros + 1;
+                modelo.addRow(registros);
+            }
+            return modelo;
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(null, e + "error login facceso");
+            return null;
+        }
+    }
 }

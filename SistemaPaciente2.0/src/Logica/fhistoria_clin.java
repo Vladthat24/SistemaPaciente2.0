@@ -29,7 +29,7 @@ public class fhistoria_clin {
     public DefaultTableModel mostrar(String buscar) {
         DefaultTableModel modelo;
 
-        String[] titulos = {"ID","H.C.","Nombre", "A.Paterno", "A.Materno", "Tipo Seguro","Direccion", "Cel/Telf", "email","Fec. Nac","sexo", "Edad","fa_nombres","fa_apellidos","fa_edad","fa_direccion","fecha_actual","estado_civil","Tipo Doc","Num. Doc"};
+        String[] titulos = {"ID","","Nombre", "A.Paterno", "A.Materno", "Tipo Seguro","Direccion", "Cel/Telf", "email","Fec. Nac","sexo", "Edad","fa_nombres","fa_apellidos","fa_edad","fa_direccion","fecha_actual","estado_civil","Tipo Doc","Num. Doc"};
 
         String[] registro = new String[20];
 

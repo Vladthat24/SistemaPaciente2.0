@@ -60,6 +60,7 @@ from recepcion where correlativo like % @buscar % order by idrecepcion desc
 
 
 //consulta de reporte recepcion documento
+
 select idrecepcion,idtrabajador,
 (select nombre from persona_trabajador where idptrabajador=idtrabajador)as nombre_trab,
 (select apaterno from persona_trabajador where idptrabajador=idtrabajador)as apaterno_trab,
@@ -75,8 +76,6 @@ set @fechafinal = '25/9/2018';
 
 
 //consulta para buscar una persona con el dni
-
-
 set @buscar='81572257';
 
 select idpersona,acceso_idacceso,usuario_reg,historia_clinica,nombre,apellidos,
@@ -85,5 +84,9 @@ estado_civil,tipo_doc,num_doc,grado_instruc,ocupacion,religion,fa_nombres,fa_ape
 fa_direccion from persona where num_doc like @buscar order by historia_clinica desc 
 
 
-
-
+//consulta para que salga el nombre completo del trabajo un el formulario login
+SELECT idacceso,idtrabajador,
+(select nombre from persona_trabajador where idptrabajador=idtrabajador) as nombretrab,
+(select apaterno from persona_trabajador where idptrabajador=idtrabajador)as apellidop,
+(select amaterno from persona_trabajador where idptrabajador=idtrabajador) as apellidom,
+acceso,login,password,estado from acceso where login='admin' and password='admin' and estado='A';
