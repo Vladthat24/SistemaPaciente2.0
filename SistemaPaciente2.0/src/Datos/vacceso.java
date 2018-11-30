@@ -13,23 +13,14 @@ package Datos;
 public class vacceso{
     
      private int idacceso;
-     private String acceso;
      private int idtrabajador;
+     private String acceso;
      private String login;
      private String password;
      private String estado;
 
 
     public vacceso() {
-    }
-
-    public vacceso(int idacceso, String acceso, int idtrabajador, String login, String password, String estado) {
-        this.idacceso = idacceso;
-        this.acceso = acceso;
-        this.idtrabajador = idtrabajador;
-        this.login = login;
-        this.password = password;
-        this.estado = estado;
     }
 
     public int getIdacceso() {
@@ -40,20 +31,20 @@ public class vacceso{
         this.idacceso = idacceso;
     }
 
-    public String getAcceso() {
-        return acceso;
-    }
-
-    public void setAcceso(String acceso) {
-        this.acceso = acceso;
-    }
-
     public int getIdtrabajador() {
         return idtrabajador;
     }
 
     public void setIdtrabajador(int idtrabajador) {
         this.idtrabajador = idtrabajador;
+    }
+
+    public String getAcceso() {
+        return acceso;
+    }
+
+    public void setAcceso(String acceso) {
+        this.acceso = acceso;
     }
 
     public String getLogin() {
@@ -81,7 +72,4 @@ public class vacceso{
     }
 
    
-    
-     
-     
 }

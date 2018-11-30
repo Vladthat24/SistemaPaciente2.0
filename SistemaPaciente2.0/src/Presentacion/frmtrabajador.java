@@ -6,7 +6,7 @@
 package Presentacion;
 
 import Datos.vtrabajador;
-import Logica.fhistoria_clin;
+import Logica.fpaciente;
 import Logica.ftrabajador;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -540,36 +540,36 @@ public class frmtrabajador extends javax.swing.JInternalFrame {
 
         dts.setNombre(txtnombre.getText());
 
-        dts.setApaterno(txtapaterno.getText());
-        dts.setAmaterno(txtamaterno.getText());
-        dts.setDireccion(txtdireccion.getText());
-        dts.setCargo_institucion(txtcargo_intitucion.getText());
-        dts.setModalidad_contrato(txtmodalidad_contrato.getText());
-        int seleccionado = cbotipo_documento.getSelectedIndex();
-        dts.setTipo_documento((String) cbotipo_documento.getItemAt(seleccionado));
-        dts.setNum_documento(txtnum_documento.getText());
-        dts.setCelular(txtcelular.getText());
-        dts.setEmail(txtemail.getText());
-        Calendar cal = Calendar.getInstance();
-        String fecha = cal.get(cal.DATE) + " / " + (cal.get(cal.MONTH) + 1) + " / " + (cal.get(cal.YEAR));
-        dts.setFecha_registro(fecha);
+//        dts.setApaterno(txtapaterno.getText());
+//        dts.setAmaterno(txtamaterno.getText());
+//        dts.setDireccion(txtdireccion.getText());
+//        dts.setCargo_institucion(txtcargo_intitucion.getText());
+//        dts.setModalidad_contrato(txtmodalidad_contrato.getText());
+//        int seleccionado = cbotipo_documento.getSelectedIndex();
+//        dts.setTipo_documento((String) cbotipo_documento.getItemAt(seleccionado));
+//        dts.setNum_documento(txtnum_documento.getText());
+//        dts.setCelular(txtcelular.getText());
+//        dts.setEmail(txtemail.getText());
+//        Calendar cal = Calendar.getInstance();
+//        String fecha = cal.get(cal.DATE) + " / " + (cal.get(cal.MONTH) + 1) + " / " + (cal.get(cal.YEAR));
+//        dts.setFecha_registro(fecha);
 
         if (accion.equals("guardar")) {
-            if (func.insertar(dts)) {
-                JOptionPane.showMessageDialog(rootPane, "el trabajador fue registrado satisfactoriamente");
-                mostrar("");
-                inhabilitar();
-
-            }
-
-        } else if (accion.equals("editar")) {
-            dts.setIdptrabajador(Integer.parseInt(txtidtrabajador.getText()));
-
-            if (func.editar(dts)) {
-                JOptionPane.showMessageDialog(rootPane, "El trabajador fue editado satisfactoriamente");
-                mostrar("");
-                inhabilitar();
-            }
+//            if (func.insertar(dts)) {
+//                JOptionPane.showMessageDialog(rootPane, "el trabajador fue registrado satisfactoriamente");
+//                mostrar("");
+//                inhabilitar();
+//
+//            }
+//
+//        } else if (accion.equals("editar")) {
+////            dts.setIdptrabajador(Integer.parseInt(txtidtrabajador.getText()));
+//
+//            if (func.editar(dts)) {
+//                JOptionPane.showMessageDialog(rootPane, "El trabajador fue editado satisfactoriamente");
+//                mostrar("");
+//                inhabilitar();
+//            }
         }
     }//GEN-LAST:event_btnguardarActionPerformed
 
@@ -618,8 +618,8 @@ public class frmtrabajador extends javax.swing.JInternalFrame {
                 ftrabajador func = new ftrabajador();
                 vtrabajador dts = new vtrabajador();
 
-                dts.setIdptrabajador(Integer.parseInt(txtidtrabajador.getText()));
-                func.eliminar(dts);
+//                dts.setIdptrabajador(Integer.parseInt(txtidtrabajador.getText()));
+//                func.eliminar(dts);
                 mostrar("");
                 inhabilitar();
 

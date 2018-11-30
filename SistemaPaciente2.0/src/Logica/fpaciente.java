@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Logica;
 
-import Datos.vh_paciente;
+package Logica;
+import Datos.vpaciente;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author CARLOS
  */
-public class fhistoria_clin {
+public class fpaciente {
 
     private conexion mysql = new conexion();
     private Connection cn = mysql.conectar();
@@ -29,38 +24,42 @@ public class fhistoria_clin {
     public DefaultTableModel mostrar(String buscar) {
         DefaultTableModel modelo;
 
-        String[] titulos = {"ID","","Nombre", "A.Paterno", "A.Materno", "Tipo Seguro","Direccion", "Cel/Telf", "email","Fec. Nac","sexo", "Edad","fa_nombres","fa_apellidos","fa_edad","fa_direccion","fecha_actual","estado_civil","Tipo Doc","Num. Doc"};
+        String[] titulos = {"ID","IDACCESO","USUARIO", "H. CLINICA", "NOMBRES", "APELLIDOS","TIPO SEGURO", "DIRECCION", "CELULAR","EMAIL","FECHA NAC.", "LUGAR NAC.",
+                "           LUGAR PROC.","SEXO","EDAD","FECHA REG.","ESTADO CIVIL","TIPO DOC.","N° DOC.","GRADO INSTRUC.","OCUPACION","RELIGION","FA NOMBRES","FA APELLIDOS",
+                            "FA EDAD","FA DIREC."};
 
-        String[] registro = new String[20];
+        String[] registro = new String[26];
 
         totalregistros = 0;
         modelo = new DefaultTableModel(null, titulos);
 
-        sSQL = "select p.idpersona,p.historia_clinica,p.nombre,p.apaterno,p.amaterno,"
-                + "p.tipo_seguro,p.direccion,p.celular,p.email,p.fecha_nacimiento,"
-                + "p.sexo,p.edad,p.fa_nombres,p.fa_apellidos,p.fa_edad,p.fa_direccion,"
-                + "p.fecha_actual,p.estado_civil,p.tipo_documento,h.codigo_paciente_dni from persona p inner join h_paciente h "
-                + "on p.idpersona=h.idpersona where nombre like '%"+ buscar + "%' or apaterno like '%"+ buscar+"%' or historia_clinica like '%"
-                + buscar+"%' or codigo_paciente_dni like '%"+ buscar+"%' order by idpersona desc";
+        sSQL = "select idpaciente,idacceso,usuario_acceso,historia_clinica,nombre,apellidos,"
+                + "tipo_seguro,direccion,celular,"
+                + "email,fecha_nac,lugar_nac,lugar_proc,sexo,edad,fecha_reg,estado_civil,tipo_doc,num_doc,"
+                + "grado_instruc,ocupacion,"
+                + "religion,fa_nombres,fa_apellidos,fa_edad,fa_direccion"
+                + " from paciente where nombre like '%"+ buscar + "%' or apellidos like '%"+ buscar+"%' or "
+                + "historia_clinica like '%"
+                + buscar+"%' num_doc like '%"+ buscar+"%' order by idpaciente desc";
 
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
 
             while (rs.next()) {
-                registro[0] = rs.getString("idpersona");
-                registro[1]=rs.getString("historia_clinica");
-                registro[2] = rs.getString("nombre");
-                registro[3] = rs.getString("apaterno");
-                registro[4] = rs.getString("amaterno");
-                registro[5] = rs.getString("tipo_seguro");
-                registro[6] = rs.getString("direccion");
-                registro[7] = rs.getString("celular");
-                registro[8] = rs.getString("email");
-                registro[9] = rs.getString("fecha_nacimiento");
-                registro[10] = rs.getString("sexo");
-                registro[11] = rs.getString("edad");
-                registro[12] = rs.getString("fa_nombres");
+                registro[0] = rs.getString("idpaciente");
+                registro[1]=rs.getString("idacceso");
+                registro[2] = rs.getString("usuario_acceso");
+                registro[3] = rs.getString("historia_clinica");
+                registro[4] = rs.getString("nombre");
+                registro[5] = rs.getString("apellidos");
+                registro[6] = rs.getString("tipo_seguro");
+                registro[7] = rs.getString("direccion");
+                registro[8] = rs.getString("celular");
+                registro[9] = rs.getString("email");
+                registro[10] = rs.getString("fecha_nac");
+                registro[11] = rs.getString("lugar");
+                registro[12] = rs.getString("");
                 registro[13] = rs.getString("fa_apellidos");
                 registro[14] = rs.getString("fa_edad");
                 registro[15] = rs.getString("fa_direccion");
@@ -77,13 +76,13 @@ public class fhistoria_clin {
             return modelo;
 
         } catch (Exception e) {
-            JOptionPane.showConfirmDialog(null, e + " fh_error 01 ");
+            JOptionPane.showConfirmDialog(null, e + " PACIENTES BUSCAR 1 ");
             return null;
         }
 
     }
 
-    public boolean insertar(vh_paciente dts) {
+    public boolean insertar(vpaciente dts) {
         sSQL = "insert into persona (historia_clinica,nombre,apaterno,amaterno,tipo_seguro,"
                 +"direccion,celular,email,fecha_nacimiento,sexo,edad,fa_nombres,fa_apellidos,"
                 + "fa_edad,fa_direccion,fecha_actual,estado_civil,tipo_documento)"
@@ -138,7 +137,7 @@ public class fhistoria_clin {
         }
     }
 
-    public boolean editar(vh_paciente dts) {
+    public boolean editar( dts) {
         sSQL = "update persona set historia_clinica=?,nombre=?,apaterno=?,amaterno=?,"
                 + "tipo_seguro=?,direccion=?,celular=?,email=?,fecha_nacimiento=?,"
                 + "sexo=?,edad=?,fa_nombres=?,fa_apellidos=?,fa_edad=?,fa_direccion=?,fecha_actual=?,estado_civil=?,"

@@ -11,7 +11,7 @@ import java.sql.Date;
  *
  * @author VladHat
  */
-public class vhistoria_clin {
+public class vpaciente {
     
   private int idpersona;
   private int idtrabajador;
@@ -37,10 +37,10 @@ public class vhistoria_clin {
   private String fa_edad;
   private String fa_direccion;
 
-    public vhistoria_clin() {
+    public vpaciente() {
     }
 
-    public vhistoria_clin(int idpersona, int idtrabajador, String hitoria_clinica, String nombre, String apellidos, String tipo_seguro, String direccion, String celular, String fecha_nac, String lugar_nac, String lugar_proc, String sexo, String edad, String fecha_reg, String estado_civil, String tipo_doc, String num_doc, String grado_instruc, String ocupacion, String religion, String fa_apellidos, String fa_edad, String fa_direccion) {
+    public vpaciente(int idpersona, int idtrabajador, String hitoria_clinica, String nombre, String apellidos, String tipo_seguro, String direccion, String celular, String fecha_nac, String lugar_nac, String lugar_proc, String sexo, String edad, String fecha_reg, String estado_civil, String tipo_doc, String num_doc, String grado_instruc, String ocupacion, String religion, String fa_apellidos, String fa_edad, String fa_direccion) {
         this.idpersona = idpersona;
         this.idtrabajador = idtrabajador;
         this.hitoria_clinica = hitoria_clinica;

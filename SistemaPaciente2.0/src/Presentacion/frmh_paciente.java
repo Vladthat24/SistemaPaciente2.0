@@ -5,9 +5,9 @@
  */
 package Presentacion;
 
-import Datos.vh_paciente;
+
 import Logica.conexion;
-import Logica.fhistoria_clin;
+import Logica.fpaciente;
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -79,54 +79,54 @@ public class frmh_paciente extends javax.swing.JInternalFrame {
             return;
         }
 
-        vh_paciente dts = new vh_paciente();
-        fhistoria_clin func = new fhistoria_clin();
-
-        dts.setHistoria_clinica(txthistoria_clinica.getText());
-        dts.setNombre(txtnombre.getText());
-        dts.setApaterno(txtapaterno.getText());
-        dts.setAmaterno(txtamaterno.getText());
-        int selecc = cbotipo_seguro.getSelectedIndex();
-        dts.setTipo_seguro((String) cbotipo_seguro.getItemAt(selecc));
-        dts.setDireccion(txtdireccion.getText());
-        dts.setCelular(txtcelular.getText());
-        dts.setEmail(txtemail.getText());
-        dts.setFecha_nacimiento(txtfecha_nacimiento.getText());
-        selecc = cbosexo.getSelectedIndex();
-        dts.setSexo((String) cbosexo.getItemAt(selecc));
-        dts.setEdad(lbledad.getText());
-        dts.setFa_nombres(txtfa_nombres.getText());
-        dts.setFa_apellidos(txtfa_apellidos.getText());
-        dts.setFa_edad(txtfa_edad.getText());
-        dts.setFa_direccion(txtfa_direccion.getText());
-
-        dts.setFecha_actual(lblfecha_actual.getText());
-        selecc = cboestado_civil.getSelectedIndex();
-        dts.setEstado_civil((String) cboestado_civil.getItemAt(selecc));
-        selecc = cbotipo_documento.getSelectedIndex();
-        dts.setTipo_documento((String) cbotipo_documento.getItemAt(selecc));
-        dts.setCodigo_paciente_dni(txtcodigo_paciente_dni.getText());
+////        vh_paciente dts = new vh_paciente();
+//        fpaciente func = new fpaciente();
+//
+//        dts.setHistoria_clinica(txthistoria_clinica.getText());
+//        dts.setNombre(txtnombre.getText());
+//        dts.setApaterno(txtapaterno.getText());
+//        dts.setAmaterno(txtamaterno.getText());
+//        int selecc = cbotipo_seguro.getSelectedIndex();
+//        dts.setTipo_seguro((String) cbotipo_seguro.getItemAt(selecc));
+//        dts.setDireccion(txtdireccion.getText());
+//        dts.setCelular(txtcelular.getText());
+//        dts.setEmail(txtemail.getText());
+//        dts.setFecha_nacimiento(txtfecha_nacimiento.getText());
+//        selecc = cbosexo.getSelectedIndex();
+//        dts.setSexo((String) cbosexo.getItemAt(selecc));
+//        dts.setEdad(lbledad.getText());
+//        dts.setFa_nombres(txtfa_nombres.getText());
+//        dts.setFa_apellidos(txtfa_apellidos.getText());
+//        dts.setFa_edad(txtfa_edad.getText());
+//        dts.setFa_direccion(txtfa_direccion.getText());
+//
+//        dts.setFecha_actual(lblfecha_actual.getText());
+//        selecc = cboestado_civil.getSelectedIndex();
+//        dts.setEstado_civil((String) cboestado_civil.getItemAt(selecc));
+//        selecc = cbotipo_documento.getSelectedIndex();
+//        dts.setTipo_documento((String) cbotipo_documento.getItemAt(selecc));
+//        dts.setCodigo_paciente_dni(txtcodigo_paciente_dni.getText());
 
         if (accion.equals("guardar")) {
-            if (func.insertar(dts)) {
-                JOptionPane.showMessageDialog(rootPane, "el paciente fue registrado satisfactoriamente");
-                mostrar("");
-                inhabilitar();
-
-                checkselecction.setSelected(false);
-
-            }
+//            if (func.insertar(dts)) {
+//                JOptionPane.showMessageDialog(rootPane, "el paciente fue registrado satisfactoriamente");
+//                mostrar("");
+//                inhabilitar();
+//
+//                checkselecction.setSelected(false);
+//
+//            }
 
         } else if (accion.equals("editar")) {
-            dts.setIdpersona(Integer.parseInt(txtidpersona.getText()));
-
-            if (func.editar(dts)) {
-                JOptionPane.showMessageDialog(rootPane, "El paciente fue Editado satisfactoriamente");
-                mostrar("");
-                inhabilitar();
-
-                checkselecction.setSelected(false);
-            }
+//            dts.setIdpersona(Integer.parseInt(txtidpersona.getText()));
+//
+//            if (func.editar(dts)) {
+//                JOptionPane.showMessageDialog(rootPane, "El paciente fue Editado satisfactoriamente");
+//                mostrar("");
+//                inhabilitar();
+//
+//                checkselecction.setSelected(false);
+//            }
         }
     }
 
@@ -278,7 +278,7 @@ public class frmh_paciente extends javax.swing.JInternalFrame {
     void mostrar(String buscar) {
         try {
             DefaultTableModel modelo;
-            fhistoria_clin func = new fhistoria_clin();
+            fpaciente func = new fpaciente();
             modelo = func.mostrar(buscar);
 
             tablalistado.setModel(modelo);
@@ -951,13 +951,13 @@ public class frmh_paciente extends javax.swing.JInternalFrame {
             int confirmacion = JOptionPane.showConfirmDialog(rootPane, "Estás seguro de Eliminar el paciente?", "Confirmar", 2);
 
             if (confirmacion == 0) {
-                fhistoria_clin func = new fhistoria_clin();
-                vh_paciente dts = new vh_paciente();
+                fpaciente func = new fpaciente();
+//                vh_paciente dts = new vh_paciente();
 
-                dts.setIdpersona(Integer.parseInt(txtidpersona.getText()));
-                func.eliminar(dts);
-                mostrar("");
-                inhabilitar();
+//                dts.setIdpersona(Integer.parseInt(txtidpersona.getText()));
+//                func.eliminar(dts);
+//                mostrar("");
+//                inhabilitar();
 
             }
 

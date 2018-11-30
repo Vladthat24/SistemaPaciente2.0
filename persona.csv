@@ -1,4 +1,4 @@
-idpersona;acceso_idacceso;usuario_reg;historia_clinica;nombre;apellidos;tipo_seguro;direccion;celular;email;fecha_nac;lugar_nac;lugar_proc;sexo;edad;fecha_reg;estado_civil;tipo_documento;num_doc;grado_instruc;ocupacion;religion;fa_nombres;fa_apellidos;fa_edad;fa_direccion
+idpaciente;idacceso;usuario_acceso;historia_clinica;nombre;apellidos;tipo_seguro;direccion;celular;email;fecha_nac;lugar_nac;lugar_proc;sexo;edad;fecha_reg;estado_civil;tipo_documento;num_doc;grado_instruc;ocupacion;religion;fa_nombres;fa_apellidos;fa_edad;fa_direccion
 1;1;DATABASE ADMINISTRADOR;9;ELVA KIDA ;SANCHEZ  REYES;SIS;A.H.SAN MARTIN DE PORRES VIRGEN DE LOURDES M;;;19/11/1968;;;FEMENINO;49 Años3 Meses y 10 Dias;1/03/2018;SOLTERO;    DNI;80288436;;;;;;;
 2;1;DATABASE ADMINISTRADOR;10;LEYLA BRIGITTE;LAUREANO UGARTE;SIS;PJE. MARIANO MELGAR MZ25-LT14;;;26/02/2001;;;FEMENINO;16Años - 8 Meses -20 Dias;6/10/2017;SOLTERO;    DNI;75344980;;;;;;;
 3;1;DATABASE ADMINISTRADOR;19;MATHIAS;SAN MIGUEL  MOLINA;SIS; CALLE MICAELA BASTIDAS 357 ;;;30/09/2013;;;MASCULINO;4 Años5 Meses y 12 Dias;12/03/2018;SOLTERO;    DNI;78272911;;;;;;;
