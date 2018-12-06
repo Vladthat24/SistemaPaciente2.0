@@ -13,14 +13,16 @@ import java.sql.Date;
  */
 public class vpaciente {
     
-  private int idpersona;
-  private int idtrabajador;
+  private int idpaciente;
+  private int idacceso;
+  private String usuario_acceso;
   private String hitoria_clinica;
   private String nombre;
   private String apellidos;
   private String tipo_seguro;
   private String direccion;
   private String celular;
+  private String email;
   private String fecha_nac;
   private String lugar_nac;
   private String lugar_proc;
@@ -33,6 +35,7 @@ public class vpaciente {
   private String grado_instruc;
   private String ocupacion;
   private String religion;
+  private String fa_nombres;
   private String fa_apellidos;
   private String fa_edad;
   private String fa_direccion;
@@ -40,15 +43,17 @@ public class vpaciente {
     public vpaciente() {
     }
 
-    public vpaciente(int idpersona, int idtrabajador, String hitoria_clinica, String nombre, String apellidos, String tipo_seguro, String direccion, String celular, String fecha_nac, String lugar_nac, String lugar_proc, String sexo, String edad, String fecha_reg, String estado_civil, String tipo_doc, String num_doc, String grado_instruc, String ocupacion, String religion, String fa_apellidos, String fa_edad, String fa_direccion) {
-        this.idpersona = idpersona;
-        this.idtrabajador = idtrabajador;
+    public vpaciente(int idpaciente, int idacceso, String usuario_acceso, String hitoria_clinica, String nombre, String apellidos, String tipo_seguro, String direccion, String celular, String email, String fecha_nac, String lugar_nac, String lugar_proc, String sexo, String edad, String fecha_reg, String estado_civil, String tipo_doc, String num_doc, String grado_instruc, String ocupacion, String religion, String fa_nombres, String fa_apellidos, String fa_edad, String fa_direccion) {
+        this.idpaciente = idpaciente;
+        this.idacceso = idacceso;
+        this.usuario_acceso = usuario_acceso;
         this.hitoria_clinica = hitoria_clinica;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.tipo_seguro = tipo_seguro;
         this.direccion = direccion;
         this.celular = celular;
+        this.email = email;
         this.fecha_nac = fecha_nac;
         this.lugar_nac = lugar_nac;
         this.lugar_proc = lugar_proc;
@@ -61,25 +66,34 @@ public class vpaciente {
         this.grado_instruc = grado_instruc;
         this.ocupacion = ocupacion;
         this.religion = religion;
+        this.fa_nombres = fa_nombres;
         this.fa_apellidos = fa_apellidos;
         this.fa_edad = fa_edad;
         this.fa_direccion = fa_direccion;
     }
 
-    public int getIdpersona() {
-        return idpersona;
+    public int getIdpaciente() {
+        return idpaciente;
     }
 
-    public void setIdpersona(int idpersona) {
-        this.idpersona = idpersona;
+    public void setIdpaciente(int idpaciente) {
+        this.idpaciente = idpaciente;
     }
 
-    public int getIdtrabajador() {
-        return idtrabajador;
+    public int getIdacceso() {
+        return idacceso;
     }
 
-    public void setIdtrabajador(int idtrabajador) {
-        this.idtrabajador = idtrabajador;
+    public void setIdacceso(int idacceso) {
+        this.idacceso = idacceso;
+    }
+
+    public String getUsuario_acceso() {
+        return usuario_acceso;
+    }
+
+    public void setUsuario_acceso(String usuario_acceso) {
+        this.usuario_acceso = usuario_acceso;
     }
 
     public String getHitoria_clinica() {
@@ -128,6 +142,14 @@ public class vpaciente {
 
     public void setCelular(String celular) {
         this.celular = celular;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getFecha_nac() {
@@ -226,6 +248,14 @@ public class vpaciente {
         this.religion = religion;
     }
 
+    public String getFa_nombres() {
+        return fa_nombres;
+    }
+
+    public void setFa_nombres(String fa_nombres) {
+        this.fa_nombres = fa_nombres;
+    }
+
     public String getFa_apellidos() {
         return fa_apellidos;
     }
@@ -249,6 +279,7 @@ public class vpaciente {
     public void setFa_direccion(String fa_direccion) {
         this.fa_direccion = fa_direccion;
     }
-  
+
+    
 }
 
