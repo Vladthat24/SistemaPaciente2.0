@@ -30,35 +30,31 @@ public class ftrabajador {
     public DefaultTableModel mostrar(String buscar) {
         DefaultTableModel modelo;
 
-        String[] titulos = {"ID", "Nombre", "Apaterno", "Amaterno", "Direccion","Cargo Intitucion","Modalidad Contrato", "Doc", "Número Documento", "Celular", "Email", "FechaCreacion"};
+        String[] titulos = {"ID", "NOMBRE", "APELLIDOS", "TIPO DOC.", "NUM. DNI", "CARGO INST.", "MOD. CONTRAT.", "NUM. CEL.", "EMAIL", "FECHA REG."};
 
-        String[] registro = new String[12];
+        String[] registro = new String[10];
 
         totalregistros = 0;
         modelo = new DefaultTableModel(null, titulos);
 
-        sSQL = "select p.idptrabajador,p.nombre,p.apaterno,p.amaterno,p.direccion,p.cargo_institucion,p.modalidad_contrato,p.tipo_documento,"
-                + "t.num_documento,t.celular,t.email,t.fecha_registro from persona_trabajador p inner join trabajador t "
-                + "on p.idptrabajador=t.idptrabajador where num_documento like '%"
-                + buscar + "%' order by idptrabajador desc";
+        sSQL = "select idtrabajador,nombre,apellidos,tipo_doc,num_dni,cargo_inst,mod_cont,num_cel,email,fecha_reg from trabajador where num_dni like '%"
+                + buscar + "%' order by idtrabajador desc";
 
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
 
             while (rs.next()) {
-                registro[0] = rs.getString("idptrabajador");
+                registro[0] = rs.getString("idtrabajador");
                 registro[1] = rs.getString("nombre");
-                registro[2] = rs.getString("apaterno");
-                registro[3] = rs.getString("amaterno");
-                registro[4] = rs.getString("direccion");
-                registro[5] = rs.getString("cargo_institucion");
-                registro[6] = rs.getString("modalidad_contrato");
-                registro[7] = rs.getString("tipo_documento");
-                registro[8] = rs.getString("num_documento");
-                registro[9] = rs.getString("celular");
-                registro[10] = rs.getString("email");
-                registro[11] = rs.getString("fecha_registro");
+                registro[2] = rs.getString("apellidos");
+                registro[3] = rs.getString("tipo_doc");
+                registro[4] = rs.getString("num_dni");
+                registro[5] = rs.getString("cargo_inst");
+                registro[6] = rs.getString("mod_cont");
+                registro[7] = rs.getString("num_cel");
+                registro[8] = rs.getString("email");
+                registro[9] = rs.getString("fecha_reg");
 
                 totalregistros = totalregistros + 1;
                 modelo.addRow(registro);
@@ -67,121 +63,94 @@ public class ftrabajador {
             return modelo;
 
         } catch (Exception e) {
-            JOptionPane.showConfirmDialog(null, e + "error 01");
+            JOptionPane.showConfirmDialog(null, e + "ERROR TRABAJADOR 01");
             return null;
         }
 
     }
 
     public boolean insertar(vtrabajador dts) {
-        sSQL = "insert into persona_trabajador (nombre,apaterno,amaterno,direccion,cargo_institucion,modalidad_contrato,tipo_documento)"
-                + "values (?,?,?,?,?,?,?)";
-        sSQL2 = "insert into trabajador(idptrabajador,num_documento,celular,email,fecha_registro)"
-                + "values ((select idptrabajador from persona_trabajador order by idptrabajador desc limit 1),?,?,?,?)";
+        sSQL = "insert into trabajador (nombre,apellidos,tipo_doc,num_dni,cargo_inst,mod_cont,num_cel,email,fecha_reg)"
+                + "values (?,?,?,?,?,?,?,?,?)";
 
         try {
 
             PreparedStatement pst = cn.prepareStatement(sSQL);
-            PreparedStatement pst2 = cn.prepareCall(sSQL2);
 
             pst.setString(1, dts.getNombre());
-            pst.setString(2, dts.getApaterno());
-            pst.setString(3, dts.getAmaterno());
-            pst.setString(4, dts.getDireccion());
-            pst.setString(5, dts.getCargo_institucion());
-            pst.setString(6, dts.getModalidad_contrato());
-            pst.setString(7, dts.getTipo_documento());
-
-            pst2.setString(1, dts.getNum_documento());
-            pst2.setString(2, dts.getCelular());
-            pst2.setString(3, dts.getEmail());
-            pst2.setString(4, dts.getFecha_registro());
+            pst.setString(2, dts.getApellidos());
+            pst.setString(3, dts.getTipo_doc());
+            pst.setString(4, dts.getNum_dni());
+            pst.setString(5, dts.getCargo_inst());
+            pst.setString(6, dts.getMod_cont());
+            pst.setString(7, dts.getNum_cel());
+            pst.setString(8, dts.getEmail());
+            pst.setString(9, dts.getFecha_reg());
 
             int n = pst.executeUpdate();
 
             if (n != 0) {
-                int n2 = pst2.executeUpdate();
-                if (n2 != 0) {
-                    return true;
-                } else {
-                    return false;
-                }
+
+                return true;
 
             } else {
                 return false;
             }
 
         } catch (Exception e) {
-            JOptionPane.showConfirmDialog(null, e + "error 02");
+            JOptionPane.showConfirmDialog(null, e + "ERROR TRABAJADOR 02");
             return false;
         }
     }
 
     public boolean editar(vtrabajador dts) {
-        sSQL = "update persona_trabajador set nombre=?,apaterno=?,amaterno=?,direccion=?,cargo_institucion=?,modalidad_contrato=?,tipo_documento=? where idptrabajador=?";
-        sSQL2 = "update trabajador set num_documento=?,celular=?,email=?,fecha_registro=? where idptrabajador=?";
+        sSQL = "update trabajador set nombre=?,apellido=?,tipo_doc=?,num_dni=?,cargo_inst=?,"
+                + "mod_cont=?,num_cel=?,email=?,fecha_reg=? where idtrabajador=?";
 
         try {
 
             PreparedStatement pst = cn.prepareStatement(sSQL);
-            PreparedStatement pst2 = cn.prepareCall(sSQL2);
 
             pst.setString(1, dts.getNombre());
-            pst.setString(2, dts.getApaterno());
-            pst.setString(3, dts.getAmaterno());
-            pst.setString(4, dts.getDireccion());
-            pst.setString(5, dts.getCargo_institucion());
-            pst.setString(6, dts.getModalidad_contrato());
-            pst.setString(7, dts.getTipo_documento());
-            pst.setInt(8, dts.getIdptrabajador());
-
-            pst2.setString(1, dts.getNum_documento());
-            pst2.setString(2, dts.getCelular());
-            pst2.setString(3, dts.getEmail());
-            pst2.setString(4, dts.getFecha_registro());
-            pst2.setInt(5, dts.getIdptrabajador());
+            pst.setString(2, dts.getApellidos());
+            pst.setString(3, dts.getTipo_doc());
+            pst.setString(4, dts.getNum_dni());
+            pst.setString(5, dts.getCargo_inst());
+            pst.setString(6, dts.getMod_cont());
+            pst.setString(7, dts.getNum_cel());
+            pst.setString(8, dts.getEmail());
+            pst.setString(9, dts.getFecha_reg());
 
             int n = pst.executeUpdate();
 
             if (n != 0) {
-                int n2 = pst2.executeUpdate();
-                if (n2 != 0) {
-                    return true;
-                } else {
-                    return false;
-                }
+
+                return true;
 
             } else {
                 return false;
             }
 
         } catch (Exception e) {
-            JOptionPane.showConfirmDialog(null, e + "error 03");
+            JOptionPane.showConfirmDialog(null, e + "ERROR TRABAJADOR 03");
             return false;
         }
     }
 
     public boolean eliminar(vtrabajador dts) {
-        sSQL = "delete from trabajador where idptrabajador=?";
-        sSQL2 = "delete from persona_trabajador where idptrabajador=?";
+        sSQL = "delete from trabajador where idtrabajador=?";
 
         try {
 
             PreparedStatement pst = cn.prepareStatement(sSQL);
-            PreparedStatement pst2 = cn.prepareCall(sSQL2);
 
-            pst.setInt(1, dts.getIdptrabajador());
-            pst2.setInt(1, dts.getIdptrabajador());
+            pst.setInt(1, dts.getIdtrabajador());
 
             int n = pst.executeUpdate();
 
             if (n != 0) {
-                int n2 = pst2.executeUpdate();
-                if (n2 != 0) {
-                    return true;
-                } else {
-                    return false;
-                }
+
+                return true;
             } else {
                 return false;
             }
@@ -192,46 +161,4 @@ public class ftrabajador {
         }
     }
 
-    public DefaultTableModel login(String login, String password) {
-        DefaultTableModel modelo;
-
-        String[] titulos = {"ID", "Nombre", "Apaterno", "Amaterno", "Acceso", "Login", "Clave", "Estado"};
-
-        String[] registro = new String[8];
-
-        totalregistros = 0;
-        modelo = new DefaultTableModel(null, titulos);
-
-        sSQL = "select p.idpersoa,p.nombre,p.apaterno,p.amaterno,"
-                + "t.acceso,t.login,t.password,t.estado from persona p inner join Trabajador t "
-                + "on p.idpersona=t.idpersona where t.login='"
-                + login + "' and t.password='" + password + "' and t.estado='A'";
-
-        try {
-            Statement st = cn.createStatement();
-            ResultSet rs = st.executeQuery(sSQL);
-
-            while (rs.next()) {
-                registro[0] = rs.getString("idpersona");
-                registro[1] = rs.getString("nombre");
-                registro[2] = rs.getString("apaterno");
-                registro[3] = rs.getString("amaterno");
-
-                registro[4] = rs.getString("acceso");
-                registro[5] = rs.getString("login");
-                registro[6] = rs.getString("password");
-                registro[7] = rs.getString("estado");
-
-                totalregistros = totalregistros + 1;
-                modelo.addRow(registro);
-
-            }
-            return modelo;
-
-        } catch (Exception e) {
-            JOptionPane.showConfirmDialog(null, e);
-            return null;
-        }
-
-    }
 }

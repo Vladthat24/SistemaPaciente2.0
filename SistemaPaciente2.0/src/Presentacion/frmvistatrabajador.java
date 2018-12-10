@@ -41,7 +41,7 @@ public class frmvistatrabajador extends javax.swing.JFrame {
             ocultar_columna();
             lblTotalregistros.setText("Total Registros "+ Integer.toString(func.totalregistros));
         } catch (Exception e) {
-            JOptionPane.showConfirmDialog(rootPane, e + "error 01");
+            JOptionPane.showConfirmDialog(rootPane, e + "ERROR VISTA TRABAJADOR 01");
         }
     }
 
@@ -161,7 +161,7 @@ public class frmvistatrabajador extends javax.swing.JFrame {
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
         // TODO add your handling code here:
         String dni;
-        dni=JOptionPane.showInputDialog("Ingrese el DNI");
+        dni=JOptionPane.showInputDialog("INGRESE DNI");
         mostrar(dni);
         
     }//GEN-LAST:event_btnbuscarActionPerformed

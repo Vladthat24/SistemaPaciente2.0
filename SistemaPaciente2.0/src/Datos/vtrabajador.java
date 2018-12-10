@@ -7,12 +7,13 @@ package Datos;
 
 import java.sql.Date;
 
-public class vtrabajador  {
-    
-    private int idtrabajar;
+public class vtrabajador {
+
+    private int idtrabajador;
     private String nombre;
+    private String apellidos;
     private String tipo_doc;
-    private String num_dic;
+    private String num_dni;
     private String cargo_inst;
     private String mod_cont;
     private String num_cel;
@@ -22,11 +23,12 @@ public class vtrabajador  {
     public vtrabajador() {
     }
 
-    public vtrabajador(int idtrabajar, String nombre, String tipo_doc, String num_dic, String cargo_inst, String mod_cont, String num_cel, String email, String fecha_reg) {
-        this.idtrabajar = idtrabajar;
+    public vtrabajador(int idtrabajador, String nombre, String apellidos, String tipo_doc, String num_dni, String cargo_inst, String mod_cont, String num_cel, String email, String fecha_reg) {
+        this.idtrabajador = idtrabajador;
         this.nombre = nombre;
+        this.apellidos = apellidos;
         this.tipo_doc = tipo_doc;
-        this.num_dic = num_dic;
+        this.num_dni = num_dni;
         this.cargo_inst = cargo_inst;
         this.mod_cont = mod_cont;
         this.num_cel = num_cel;
@@ -34,12 +36,12 @@ public class vtrabajador  {
         this.fecha_reg = fecha_reg;
     }
 
-    public int getIdtrabajar() {
-        return idtrabajar;
+    public int getIdtrabajador() {
+        return idtrabajador;
     }
 
-    public void setIdtrabajar(int idtrabajar) {
-        this.idtrabajar = idtrabajar;
+    public void setIdtrabajador(int idtrabajador) {
+        this.idtrabajador = idtrabajador;
     }
 
     public String getNombre() {
@@ -50,6 +52,14 @@ public class vtrabajador  {
         this.nombre = nombre;
     }
 
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
     public String getTipo_doc() {
         return tipo_doc;
     }
@@ -58,12 +68,12 @@ public class vtrabajador  {
         this.tipo_doc = tipo_doc;
     }
 
-    public String getNum_dic() {
-        return num_dic;
+    public String getNum_dni() {
+        return num_dni;
     }
 
-    public void setNum_dic(String num_dic) {
-        this.num_dic = num_dic;
+    public void setNum_dni(String num_dni) {
+        this.num_dni = num_dni;
     }
 
     public String getCargo_inst() {
@@ -105,5 +115,6 @@ public class vtrabajador  {
     public void setFecha_reg(String fecha_reg) {
         this.fecha_reg = fecha_reg;
     }
-    
+
+  
 }

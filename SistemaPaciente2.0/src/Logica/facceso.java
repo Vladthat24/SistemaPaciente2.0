@@ -30,9 +30,9 @@ public class facceso {
     public DefaultTableModel mostrar(String buscar) {
         DefaultTableModel modelo;
 
-        String[] titulos = {"ID", "IDTRABAJADOR", "TRABAJADOR", "ACCESO", "USUARIO", "CONTRASEÑA", "ESTADO"};
+        String[] titulos = {"ID", "IDTRABAJADOR", "TRABAJADOR", "ACCESO", "USUARIO", "CONTRASEÑA", "ESTADO","FECHA REG."};
 
-        String[] registro = new String[7];
+        String[] registro = new String[8];
 
         totalregistros = 0;
         modelo = new DefaultTableModel(null, titulos);
@@ -41,7 +41,7 @@ public class facceso {
         sSQL = "select idacceso,idtrabajador,"
                 + "(select nombre from trabajador where idptrabajador=idtrabajador) as trabajadornombre,"
                 + "(select apellidos from trabajador where idptrabajador=idtrabajador) as trabajadoapellidos,"
-                + "acceso,login,password,estado from acceso where login like '%" + buscar + "%' order by idacceso desc";
+                + "acceso,login,password,estado,fecha_reg from acceso where trabajadoapellidos like '%" + buscar + "%' order by idacceso desc";
 
         try {
             Statement st = cn.createStatement();
@@ -55,6 +55,7 @@ public class facceso {
                 registro[4] = rs.getString("login");
                 registro[5] = rs.getString("password");
                 registro[6] = rs.getString("estado");
+                registro[7] = rs.getString("fecha_reg");
 
                 totalregistros = totalregistros + 1;
                 modelo.addRow(registro);
@@ -70,19 +71,20 @@ public class facceso {
     }
 
     public boolean insertar(vacceso dts) {
-        sSQL = "insert into acceso (idtrabajador,acceso,login,password,estado)"
-                + "values (?,?,?,?,?)";
+        sSQL = "insert into acceso (idtrabajador,acceso,login,password,estado,fecha_reg)"
+                + "values (?,?,?,?,?,?)";
 
         try {
 
             PreparedStatement pst = cn.prepareStatement(sSQL);
 
-            pst.setInt(1, dts.getIdacceso());
-            pst.setInt(2, dts.getIdtrabajador());
-            pst.setString(3, dts.getAcceso());
-            pst.setString(4, dts.getLogin());
-            pst.setString(5, dts.getPassword());
-            pst.setString(6, dts.getEstado());
+ 
+            pst.setInt(1, dts.getIdtrabajador());
+            pst.setString(2, dts.getAcceso());
+            pst.setString(3, dts.getLogin());
+            pst.setString(4, dts.getPassword());
+            pst.setString(5, dts.getEstado());
+            pst.setString(6, dts.getFecha_reg());
 
             int n = pst.executeUpdate();
 
@@ -100,18 +102,19 @@ public class facceso {
     }
 
     public boolean editar(vacceso dts) {
-        sSQL = "update acceso set idacceso=?,idtrabajador=?,acceso=?,login=?,password=?,estado=?";
+        sSQL = "update acceso set idtrabajador=?,acceso=?,login=?,password=?,estado=?,fecha_reg=?";
 
         try {
 
             PreparedStatement pst = cn.prepareStatement(sSQL);
 
-            pst.setInt(1, dts.getIdacceso());
-            pst.setInt(2, dts.getIdtrabajador());
-            pst.setString(3, dts.getAcceso());
-            pst.setString(4, dts.getLogin());
-            pst.setString(5, dts.getPassword());
-            pst.setString(6, dts.getEstado());
+           
+            pst.setInt(1, dts.getIdtrabajador());
+            pst.setString(2, dts.getAcceso());
+            pst.setString(3, dts.getLogin());
+            pst.setString(4, dts.getPassword());
+            pst.setString(5, dts.getEstado());
+            pst.setString(6, dts.getFecha_reg());
 
             int n = pst.executeUpdate();
 
@@ -155,8 +158,8 @@ public class facceso {
 
     public DefaultTableModel login(String login, String password) {
         DefaultTableModel modelo;
-        String[] titulos = {"IDACCESO", "IDTRABAJADOR", "TRABAJADOR", "ACCESO", "USUARIO", "CONTRASEÑA", "ESTADO"};
-        String[] registros = new String[7];
+        String[] titulos = {"IDACCESO", "IDTRABAJADOR", "TRABAJADOR", "ACCESO", "USUARIO", "CONTRASEÑA", "ESTADO","FECHA REG."};
+        String[] registros = new String[8];
 
         totalregistros = 0;
 
@@ -165,7 +168,7 @@ public class facceso {
         sSQL = "SELECT idacceso,idtrabajador,"
                 + "(select nombre from persona_trabajador where idptrabajador=idtrabajador) as nombretrab,"
                 + "(select apaterno from persona_trabajador where idptrabajador=idtrabajador)as apellidos,"
-                + "acceso,login,password,estado from acceso where login='" + login + "' and password='" + password + "' and estado='ACTIVO'";
+                + "acceso,login,password,estado,fecha_reg from acceso where login='" + login + "' and password='" + password + "' and estado='ACTIVO'";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
@@ -178,6 +181,7 @@ public class facceso {
                 registros[4] = rs.getString("login");
                 registros[5] = rs.getString("password");
                 registros[6] = rs.getString("estado");
+                registros[7] =rs.getString("fecha_reg");
 
                 totalregistros = totalregistros + 1;
                 modelo.addRow(registros);

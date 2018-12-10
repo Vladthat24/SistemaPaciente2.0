@@ -3,24 +3,33 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Datos;
 
 /**
  *
  * @author CARLOS
  */
-public class vacceso{
-    
-     private int idacceso;
-     private int idtrabajador;
-     private String acceso;
-     private String login;
-     private String password;
-     private String estado;
+public class vacceso {
 
+    private int idacceso;
+    private int idtrabajador;
+    private String acceso;
+    private String login;
+    private String password;
+    private String estado;
+    private String fecha_reg;
 
     public vacceso() {
+    }
+
+    public vacceso(int idacceso, int idtrabajador, String acceso, String login, String password, String estado, String fecha_reg) {
+        this.idacceso = idacceso;
+        this.idtrabajador = idtrabajador;
+        this.acceso = acceso;
+        this.login = login;
+        this.password = password;
+        this.estado = estado;
+        this.fecha_reg = fecha_reg;
     }
 
     public int getIdacceso() {
@@ -71,5 +80,12 @@ public class vacceso{
         this.estado = estado;
     }
 
-   
+    public String getFecha_reg() {
+        return fecha_reg;
+    }
+
+    public void setFecha_reg(String fecha_reg) {
+        this.fecha_reg = fecha_reg;
+    }
+
 }
