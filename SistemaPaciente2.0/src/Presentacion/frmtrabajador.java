@@ -99,6 +99,43 @@ public class frmtrabajador extends javax.swing.JInternalFrame {
 
     }
 
+    void fechaActual() {
+        int agosto = 8;
+        int septiembre = 9;
+        Calendar today = Calendar.getInstance();
+        int fhoy_dia = today.get(Calendar.DAY_OF_MONTH);
+        int fhoy_mes = today.get(Calendar.MONTH) + 1;
+        String mes = null;
+        if (fhoy_mes == 01) {
+            mes = "Enero";
+        } else if (fhoy_mes == 02) {
+            mes = "Febreso";
+        } else if (fhoy_mes == 03) {
+            mes = "Marzo";
+        } else if (fhoy_mes == 04) {
+            mes = "Abril";
+        } else if (fhoy_mes == 05) {
+            mes = "Mayo";
+        } else if (fhoy_mes == 06) {
+            mes = "Junio";
+        } else if (fhoy_mes == 07) {
+            mes = "Julio";
+        } else if (fhoy_mes == agosto) {
+            mes = "Agosto";
+        } else if (fhoy_mes == septiembre) {
+            mes = "Septiembre";
+        } else if (fhoy_mes == 10) {
+            mes = "Octubre";
+        } else if (fhoy_mes == 11) {
+            mes = "Noviembre";
+        } else if (fhoy_mes == 12) {
+            mes = "Diciembre";
+        }
+        int fhoy_year = today.get(Calendar.YEAR);
+
+        lblfecha_registro.setText(fhoy_dia + " de " + mes + " del " + fhoy_year);
+    }
+
     void mostrar(String buscar) {
         try {
             DefaultTableModel modelo;
@@ -274,11 +311,6 @@ public class frmtrabajador extends javax.swing.JInternalFrame {
                 .addComponent(txtidtrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(149, 149, 149))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(txtcelular, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblfecha_registro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(txtnombre)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -287,20 +319,26 @@ public class frmtrabajador extends javax.swing.JInternalFrame {
                     .addComponent(txtapellidos))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(btnnuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(btnguardar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(txtcargo_intitucion)
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtmodalidad_contrato)
-                    .addComponent(txtcargo_intitucion)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(cbotipo_documento, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(cbotipo_documento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtnum_documento, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnnuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtcelular, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblfecha_registro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnguardar)
+                        .addGap(0, 157, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -309,7 +347,7 @@ public class frmtrabajador extends javax.swing.JInternalFrame {
                 .addComponent(txtidtrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtcargo_intitucion, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
+                .addGap(7, 7, 7)
                 .addComponent(txtmodalidad_contrato, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -385,14 +423,15 @@ public class frmtrabajador extends javax.swing.JInternalFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lbltotalregistros, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 834, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btneliminar)
                     .addComponent(btnbuscar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -451,33 +490,34 @@ public class frmtrabajador extends javax.swing.JInternalFrame {
         habilitar();
         btnguardar.setText("Guardar");
         accion = "guardar";
+        fechaActual();
     }//GEN-LAST:event_btnnuevoActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         // TODO add your handling code here:
         if (txtcargo_intitucion.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "INGRESA CARGO");
+            JOptionPane.showMessageDialog(rootPane, "INGRESA CARGO");
             txtcargo_intitucion.requestFocus();
             return;
         }
         if (txtmodalidad_contrato.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "INGRESA MODELAIDAD DE CONTRATO");
+            JOptionPane.showMessageDialog(rootPane, "INGRESA MODELAIDAD DE CONTRATO");
             txtmodalidad_contrato.requestFocus();
             return;
         }
         if (txtnombre.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "INGRESA NOMBRE");
+            JOptionPane.showMessageDialog(rootPane, "INGRESA NOMBRE");
             txtnombre.requestFocus();
             return;
         }
         if (txtapellidos.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "INGRESA APELLIDOS");
+            JOptionPane.showMessageDialog(rootPane, "INGRESA APELLIDOS");
             txtapellidos.requestFocus();
             return;
         }
 
         if (txtnum_documento.getText().length() != 8) {
-            JOptionPane.showConfirmDialog(rootPane, "INGRES LOS 8 DIGITOS DEL DNI");
+            JOptionPane.showMessageDialog(rootPane, "INGRESA LOS 8 DIGITOS DEL DNI");
             txtnum_documento.requestFocus();
             return;
         }
@@ -513,7 +553,7 @@ public class frmtrabajador extends javax.swing.JInternalFrame {
             }
 
         } else if (accion.equals("editar")) {
-//            dts.setIdptrabajador(Integer.parseInt(txtidtrabajador.getText()));
+            dts.setIdtrabajador(Integer.parseInt(txtidtrabajador.getText()));
 
             if (func.editar(dts)) {
                 JOptionPane.showMessageDialog(rootPane, "REGISTRO EDITADO");
@@ -534,17 +574,14 @@ public class frmtrabajador extends javax.swing.JInternalFrame {
 
         txtidtrabajador.setText(tablalistado.getValueAt(fila, 0).toString());
         txtnombre.setText(tablalistado.getValueAt(fila, 1).toString());
-
         txtapellidos.setText(tablalistado.getValueAt(fila, 2).toString());
-        txtamaterno.setText(tablalistado.getValueAt(fila, 3).toString());
-        txtdireccion.setText(tablalistado.getValueAt(fila, 4).toString());
+        cbotipo_documento.setSelectedItem(tablalistado.getValueAt(fila, 3).toString());
+        txtnum_documento.setText(tablalistado.getValueAt(fila, 4).toString());
         txtcargo_intitucion.setText(tablalistado.getValueAt(fila, 5).toString());
         txtmodalidad_contrato.setText(tablalistado.getValueAt(fila, 6).toString());
-        cbotipo_documento.setSelectedItem(tablalistado.getValueAt(fila, 7).toString());
-        txtnum_documento.setText(tablalistado.getValueAt(fila, 8).toString());
-        txtcelular.setText(tablalistado.getValueAt(fila, 9).toString());
-        txtemail.setText(tablalistado.getValueAt(fila, 10).toString());
-        lblfecha_registro.setText(tablalistado.getValueAt(fila, 11).toString());
+        txtcelular.setText(tablalistado.getValueAt(fila, 7).toString());
+        txtemail.setText(tablalistado.getValueAt(fila, 8).toString());
+        lblfecha_registro.setText(tablalistado.getValueAt(fila, 9).toString());
 
 
     }//GEN-LAST:event_tablalistadoMouseClicked
@@ -553,7 +590,7 @@ public class frmtrabajador extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 //        JOptionPane.showInputDialog(Integer.parseInt(mostrar(txtbuscar.getText())));
         String dni;
-        dni = JOptionPane.showInputDialog("Ingrese el DNI");
+        dni = JOptionPane.showInputDialog("INGRESA DNI");
         mostrar(dni);
 
 
@@ -648,11 +685,7 @@ public class frmtrabajador extends javax.swing.JInternalFrame {
 
     private void txtemailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtemailKeyTyped
         // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        int limite = 30;
-        if (Character.isDigit(c)) {
-            evt.consume();
-        }
+        int limite = 45;
         if (txtemail.getText().length() == limite) {
             evt.consume();
         }

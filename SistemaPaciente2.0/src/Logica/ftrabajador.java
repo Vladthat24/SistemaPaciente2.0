@@ -45,6 +45,7 @@ public class ftrabajador {
             ResultSet rs = st.executeQuery(sSQL);
 
             while (rs.next()) {
+               
                 registro[0] = rs.getString("idtrabajador");
                 registro[1] = rs.getString("nombre");
                 registro[2] = rs.getString("apellidos");
@@ -104,13 +105,13 @@ public class ftrabajador {
     }
 
     public boolean editar(vtrabajador dts) {
-        sSQL = "update trabajador set nombre=?,apellido=?,tipo_doc=?,num_dni=?,cargo_inst=?,"
+        sSQL = "update trabajador set nombre=?,apellidos=?,tipo_doc=?,num_dni=?,cargo_inst=?,"
                 + "mod_cont=?,num_cel=?,email=?,fecha_reg=? where idtrabajador=?";
 
         try {
 
             PreparedStatement pst = cn.prepareStatement(sSQL);
-
+            
             pst.setString(1, dts.getNombre());
             pst.setString(2, dts.getApellidos());
             pst.setString(3, dts.getTipo_doc());
@@ -120,6 +121,7 @@ public class ftrabajador {
             pst.setString(7, dts.getNum_cel());
             pst.setString(8, dts.getEmail());
             pst.setString(9, dts.getFecha_reg());
+            pst.setInt(10, dts.getIdtrabajador());
 
             int n = pst.executeUpdate();
 

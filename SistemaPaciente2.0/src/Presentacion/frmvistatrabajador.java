@@ -7,8 +7,10 @@ package Presentacion;
 
 import Datos.vtrabajador;
 import Logica.ftrabajador;
+import Logica.separarApTrab;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author INFORMATICA
@@ -23,23 +25,37 @@ public class frmvistatrabajador extends javax.swing.JFrame {
         mostrar("");
         this.setLocationRelativeTo(null);
     }
-    void ocultar_columna(){
+
+    void ocultar_columna() {
         tablelistado.getColumnModel().getColumn(0).setMaxWidth(0);
         tablelistado.getColumnModel().getColumn(0).setMinWidth(0);
         tablelistado.getColumnModel().getColumn(0).setPreferredWidth(0);
-        
-                
+
     }
-    void mostrar(String buscar){
+
+    void idUSuario() {
+        //REALIZAR AUTOMATICAMENTE EL LOGIN CON LA PRIMERA LETRA DEL NOMBRE
+        //Y EL PRIMER APELLIDO
+        String apellido = frmacceso.lblapell_trab.getText();
+        String nombre= frmacceso.lblnom_trabajador.getText();
+        
+        String[] p = separarApTrab.separarAp(apellido);
+        int i = 0;
+        if (i < p.length) {
+            frmacceso.lblusuario.setText(nombre.charAt(0)+p[i]);
+        }
+    }
+
+    void mostrar(String buscar) {
         try {
             DefaultTableModel modelo;
             ftrabajador func = new ftrabajador();
             vtrabajador dts = new vtrabajador();
-            modelo= func.mostrar(buscar);
-            
+            modelo = func.mostrar(buscar);
+
             tablelistado.setModel(modelo);
             ocultar_columna();
-            lblTotalregistros.setText("Total Registros "+ Integer.toString(func.totalregistros));
+            lblTotalregistros.setText("Total Registros " + Integer.toString(func.totalregistros));
         } catch (Exception e) {
             JOptionPane.showConfirmDialog(rootPane, e + "ERROR VISTA TRABAJADOR 01");
         }
@@ -161,24 +177,27 @@ public class frmvistatrabajador extends javax.swing.JFrame {
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
         // TODO add your handling code here:
         String dni;
-        dni=JOptionPane.showInputDialog("INGRESE DNI");
+        dni = JOptionPane.showInputDialog("INGRESE DNI");
         mostrar(dni);
-        
+
     }//GEN-LAST:event_btnbuscarActionPerformed
 
     private void tablelistadoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablelistadoMousePressed
         // TODO add your handling code here:
-        if(evt.getClickCount()==2){
-            int fila=tablelistado.getSelectedRow();
-            String cod, valor;
-            
-            cod = tablelistado.getValueAt(fila, 0).toString();
-            valor= tablelistado.getValueAt(fila, 1).toString()+ " " + tablelistado.getValueAt(fila, 2).toString();
-            
-           frmacceso.txtidtrabajador.setText(cod);
-           frmacceso.txttrabajador.setText(valor);
-           
-           this.dispose();
+        if (evt.getClickCount() == 2) {
+            int fila = tablelistado.getSelectedRow();
+            String idtrabajador, nombre, apellidos;
+
+            idtrabajador = tablelistado.getValueAt(fila, 0).toString();
+            nombre = tablelistado.getValueAt(fila, 1).toString();
+            apellidos = tablelistado.getValueAt(fila, 2).toString();
+
+            frmacceso.txtidtrabajador.setText(idtrabajador);
+            frmacceso.lblnom_trabajador.setText(nombre);
+            frmacceso.lblapell_trab.setText(apellidos);
+            idUSuario();
+
+            this.dispose();
         }
     }//GEN-LAST:event_tablelistadoMousePressed
 

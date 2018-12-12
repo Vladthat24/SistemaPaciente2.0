@@ -36,9 +36,9 @@ public class frmlogin extends javax.swing.JFrame {
 
     public frmlogin() {
         initComponents();
-        lblprocesar.setVisible(false);
-        jbarprocesar.setVisible(false);
-        jScrollPane1.setVisible(false);
+        lblprocesar.setEnabled(false);
+        jbarprocesar.setEnabled(false);
+        jScrollPane1.setEnabled(false);
         this.setTitle(".::ACCESO SAPT::.");
         this.setLocationRelativeTo(null);
 //        setIconImage(new ImageIcon(getClass().getResource("../Files/icologin.png")).getImage());
@@ -58,8 +58,8 @@ public class frmlogin extends javax.swing.JFrame {
                 form.setVisible(true);
                 setVisible(false);
                 frminicio.lblidacceso.setText(tablalistado.getValueAt(0, 0).toString());
-                frminicio.lblacceso.setText(tablalistado.getValueAt(0, 1).toString());
-                if (!frminicio.lblacceso.getText().equals("Administrador")) {
+                frminicio.lblacceso.setText(tablalistado.getValueAt(0, 3).toString());
+                if (!frminicio.lblacceso.getText().equals("ADMINISTRADOR")) {
                     frminicio.menutrabajador.setEnabled(false);
                 }
 
@@ -75,6 +75,11 @@ public class frmlogin extends javax.swing.JFrame {
         tiempo.start();
     }
 
+    private void limpiar() {
+        txtusuario.setText("");
+        txtpassword.setText("");
+    }
+
     private void ingresar() {
 
         try {
@@ -83,35 +88,54 @@ public class frmlogin extends javax.swing.JFrame {
             facceso func = new facceso();
             vacceso dts = new vacceso();
 
-            dts.setLogin(txtusuario.getText());
-            dts.setPassword(txtpassword.getText());
+//            dts.setLogin(txtusuario.getText());
+//            dts.setPassword(txtpassword.getText());
+//
+//            modelo = func.login(dts.getLogin(), dts.getPassword());
+//            tablalistado.setModel(modelo);
+            String usuario, pass;
+            int cont = 0;
 
-            modelo = func.login(dts.getLogin(), dts.getPassword());
+            while (cont < 3) {
+                if (txtusuario.getText().length() == 0 && txtpassword.getText().length() == 0) {
+                    usuario = txtusuario.getText();
+                    pass = txtpassword.getText();
+                    dts.setLogin(usuario);
+                    dts.setPassword(pass);
 
-            tablalistado.setModel(modelo);
+                }
+                modelo = func.login(dts.getLogin(), dts.getPassword());
+                tablalistado.setModel(modelo);
 
-            if (func.totalregistros > 0) {
-                cont=-1;
-                jbarprocesar.setValue(0);
-                jbarprocesar.setStringPainted(true);
-                tiempo= new Timer(TWO_SECOND,new TimerListener());
-                activar();
-//                frminicio form = new frminicio();
-//                this.dispose();
-//                form.toFront();
-//                form.setVisible(true);
-//                frminicio.lblidacceso.setText(tablalistado.getValueAt(0, 0).toString());
-//                frminicio.lblacceso.setText(tablalistado.getValueAt(0, 1).toString());
-//                if (!frminicio.lblacceso.getText().equals("Administrador")) {
-//                    frminicio.menutrabajador.setEnabled(false);
-//                }
+                if (0 < func.totalregistros) {
 
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Acceso Denegado", "Acceso al Sistema", JOptionPane.ERROR_MESSAGE);
-                jbarprocesar.setVisible(false);
-                lblprocesar.setVisible(false);
+                    cont = -1;
+                    jbarprocesar.setValue(0);
+                    jbarprocesar.setStringPainted(true);
+                    tiempo = new Timer(TWO_SECOND, new TimerListener());
+                    activar();
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "ACCESO INCORRECTO");
+                    jbarprocesar.setEnabled(false);
+                    lblprocesar.setEnabled(false);
+                }
+                cont++;
+                limpiar();
             }
+            JOptionPane.showMessageDialog(rootPane, "ACCESO DENEGADO", "Acceso al Sistema", JOptionPane.ERROR_MESSAGE);
 
+//            if (func.totalregistros > 0) {
+//                cont=-1;
+//                jbarprocesar.setValue(0);
+//                jbarprocesar.setStringPainted(true);
+//                tiempo= new Timer(TWO_SECOND,new TimerListener());
+//                activar();
+//
+//            } else {
+//                JOptionPane.showMessageDialog(rootPane, "Acceso Denegado", "Acceso al Sistema", JOptionPane.ERROR_MESSAGE);
+//                jbarprocesar.setEnabled(false);
+//                lblprocesar.setEnabled(false);
+//            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e + " Error FrmLogin");
         }
@@ -142,6 +166,7 @@ public class frmlogin extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -322,15 +347,11 @@ public class frmlogin extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -363,7 +384,7 @@ public class frmlogin extends javax.swing.JFrame {
 
     private void txtpasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpasswordKeyPressed
         // TODO add your handling code here:
-       
+
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             lblprocesar.setVisible(true);
             jbarprocesar.setVisible(true);

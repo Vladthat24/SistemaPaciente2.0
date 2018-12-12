@@ -7,6 +7,7 @@ package Presentacion;
 
 import Datos.vacceso;
 import Logica.facceso;
+import Logica.separarApTrab;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -24,24 +25,29 @@ public class frmacceso extends javax.swing.JInternalFrame {
         initComponents();
         mostrar("");
         inhabilitar();
-
+        
     }
     private String accion = "guardar";
     public static int idusuario;
-
+    
     void ocultar_columnas() {
         tablalistado.getColumnModel().getColumn(0).setMaxWidth(0);
         tablalistado.getColumnModel().getColumn(0).setMinWidth(0);
         tablalistado.getColumnModel().getColumn(0).setPreferredWidth(0);
-
-        tablalistado.getColumnModel().getColumn(2).setMaxWidth(0);
-        tablalistado.getColumnModel().getColumn(2).setMinWidth(0);
-        tablalistado.getColumnModel().getColumn(2).setPreferredWidth(0);
-
+        
+        tablalistado.getColumnModel().getColumn(1).setMaxWidth(0);
+        tablalistado.getColumnModel().getColumn(1).setMinWidth(0);
+        tablalistado.getColumnModel().getColumn(1).setPreferredWidth(0);
+        
+        tablalistado.getColumnModel().getColumn(6).setMaxWidth(0);
+        tablalistado.getColumnModel().getColumn(6).setMinWidth(0);
+        tablalistado.getColumnModel().getColumn(6).setPreferredWidth(0);
+        
     }
-    void fechaActual(){
-                int agosto=8;
-        int septiembre=9;
+    
+    void fechaActual() {
+        int agosto = 8;
+        int septiembre = 9;
         Calendar today = Calendar.getInstance();
         int fhoy_dia = today.get(Calendar.DAY_OF_MONTH);
         int fhoy_mes = today.get(Calendar.MONTH) + 1;
@@ -60,12 +66,11 @@ public class frmacceso extends javax.swing.JInternalFrame {
             mes = "Junio";
         } else if (fhoy_mes == 07) {
             mes = "Julio";
-        }else if(fhoy_mes==agosto){
-            mes="Agosto";
-        }else if(fhoy_mes==septiembre){
-            mes="Septiembre";
-        }
-        else if (fhoy_mes == 10) {
+        } else if (fhoy_mes == agosto) {
+            mes = "Agosto";
+        } else if (fhoy_mes == septiembre) {
+            mes = "Septiembre";
+        } else if (fhoy_mes == 10) {
             mes = "Octubre";
         } else if (fhoy_mes == 11) {
             mes = "Noviembre";
@@ -73,58 +78,66 @@ public class frmacceso extends javax.swing.JInternalFrame {
             mes = "Diciembre";
         }
         int fhoy_year = today.get(Calendar.YEAR);
-
+        
         lblfecha_reg.setText(fhoy_dia + " de " + mes + " del " + fhoy_year);
     }
+    
     void inhabilitar() {
         txtidacceso.setVisible(false);
         txtidtrabajador.setVisible(false);
         btntrabajador.setEnabled(false);
-        txttrabajador.setEnabled(false);
-        txtlogin.setEnabled(false);
+        lblnom_trabajador.setEnabled(false);
+        lblapell_trab.setEnabled(false);
+        lblusuario.setEnabled(false);
         txtpassword.setEnabled(false);
         lblfecha_reg.setEnabled(false);
         cboacceso.setEnabled(false);
-
+        
         btnbuscar.setEnabled(false);
         btneliminar.setEnabled(false);
         btnguardar.setEnabled(false);
         btnimprimir.setEnabled(false);
-
-        txttrabajador.setText("");
-        txtlogin.setText("");
+        cboestado.setEnabled(false);
+        
+        lblnom_trabajador.setText("");
+        lblapell_trab.setText("");
+        lblusuario.setText("");
         txtpassword.setText("");
-
+        
     }
+    
     void habilitar() {
-
+        
         txtidacceso.setVisible(false);
         txtidtrabajador.setVisible(false);
-        txttrabajador.setEnabled(false);
-        txtlogin.setEnabled(true);
+        lblnom_trabajador.setEnabled(false);
+        lblapell_trab.setEnabled(false);
+        lblusuario.setEnabled(true);
         txtpassword.setEnabled(true);
         lblfecha_reg.setEnabled(true);
-
+        
         cboacceso.setEnabled(true);
-
+        cboestado.setEnabled(true);
+        
         btnbuscar.setEnabled(true);
         btneliminar.setEnabled(true);
         btnguardar.setEnabled(true);
         btnimprimir.setEnabled(true);
         btntrabajador.setEnabled(true);
-
-        txttrabajador.setText("");
-        txtlogin.setText("");
+        
+        lblnom_trabajador.setText("");
+        lblapell_trab.setText("");
+        lblusuario.setText("");
         txtpassword.setText("");
     }
-
+    
     void mostrar(String buscar) {
         try {
             DefaultTableModel modelo;
             facceso func = new facceso();
             vacceso dts = new vacceso();
             modelo = func.mostrar(buscar);
-
+            
             tablalistado.setModel(modelo);
             ocultar_columnas();
             lbltotalregistro.setText("Total de Registros " + Integer.toString(func.totalregistros));
@@ -132,7 +145,7 @@ public class frmacceso extends javax.swing.JInternalFrame {
             JOptionPane.showConfirmDialog(rootPane, e + "ERROR FRMACCESO 01");
         }
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -145,7 +158,6 @@ public class frmacceso extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        txttrabajador = new javax.swing.JTextField();
         btntrabajador = new javax.swing.JButton();
         cboacceso = new javax.swing.JComboBox();
         btnnuevo = new javax.swing.JButton();
@@ -153,8 +165,11 @@ public class frmacceso extends javax.swing.JInternalFrame {
         txtidacceso = new javax.swing.JTextField();
         cboestado = new javax.swing.JComboBox();
         txtidtrabajador = new javax.swing.JTextField();
-        txtlogin = new javax.swing.JTextField();
         txtpassword = new javax.swing.JPasswordField();
+        lblfecha_reg = new javax.swing.JLabel();
+        lblnom_trabajador = new javax.swing.JLabel();
+        lblusuario = new javax.swing.JLabel();
+        lblapell_trab = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablalistado = new javax.swing.JTable();
@@ -162,7 +177,6 @@ public class frmacceso extends javax.swing.JInternalFrame {
         btneliminar = new javax.swing.JButton();
         btnimprimir = new javax.swing.JButton();
         lbltotalregistro = new javax.swing.JLabel();
-        lblfecha_reg = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -187,19 +201,6 @@ public class frmacceso extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(158, 178, 193));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro de Acceso"));
 
-        txttrabajador.setBackground(new java.awt.Color(158, 179, 193));
-        txttrabajador.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nombres:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 2, 12))); // NOI18N
-        txttrabajador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txttrabajadorActionPerformed(evt);
-            }
-        });
-        txttrabajador.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txttrabajadorKeyTyped(evt);
-            }
-        });
-
         btntrabajador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/user.png"))); // NOI18N
         btntrabajador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -209,8 +210,8 @@ public class frmacceso extends javax.swing.JInternalFrame {
 
         cboacceso.setBackground(new java.awt.Color(158, 179, 193));
         cboacceso.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        cboacceso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrador", "Digitador" }));
-        cboacceso.setBorder(javax.swing.BorderFactory.createTitledBorder("Acceso:"));
+        cboacceso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ADMINISTRADOR", "DIGITADOR" }));
+        cboacceso.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Acceso:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 12))); // NOI18N
 
         btnnuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/document_add.png"))); // NOI18N
         btnnuevo.setText("Nuevo");
@@ -239,66 +240,80 @@ public class frmacceso extends javax.swing.JInternalFrame {
             }
         });
 
-        txtlogin.setBackground(new java.awt.Color(158, 179, 193));
-        txtlogin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Usuario:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 2, 12))); // NOI18N
-        txtlogin.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtloginKeyTyped(evt);
-            }
-        });
-
         txtpassword.setBackground(new java.awt.Color(158, 179, 193));
         txtpassword.setText("jPasswordField1");
         txtpassword.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contraseña:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 2, 12))); // NOI18N
+
+        lblfecha_reg.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fecha de Registro", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 12))); // NOI18N
+
+        lblnom_trabajador.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nombre del Trabajador", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 12))); // NOI18N
+
+        lblusuario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Usuario del Sistema", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 12))); // NOI18N
+
+        lblapell_trab.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Apellidos del Trabajador", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 12))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txttrabajador)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btntrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnnuevo)
-                        .addGap(30, 30, 30)
-                        .addComponent(txtidacceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtidtrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnguardar))
+                    .addComponent(lblfecha_reg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtpassword)
-                    .addComponent(txtlogin)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cboacceso, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cboestado, 0, 1, Short.MAX_VALUE)))
-                .addGap(22, 22, 22))
+                        .addGap(58, 58, 58)
+                        .addComponent(btnnuevo)
+                        .addGap(29, 29, 29)
+                        .addComponent(btnguardar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtidtrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtidacceso, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(cboacceso, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
+                        .addComponent(cboestado, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblnom_trabajador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblapell_trab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btntrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(9, 9, 9))
+                    .addComponent(lblusuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txttrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btntrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblnom_trabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblapell_trab, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btntrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cboacceso)
+                    .addComponent(cboestado, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cboacceso, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cboestado, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtlogin, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblfecha_reg, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnnuevo)
                     .addComponent(btnguardar)
-                    .addComponent(txtidacceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtidtrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtidtrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtidacceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         jPanel2.setBackground(new java.awt.Color(93, 173, 170));
@@ -347,45 +362,39 @@ public class frmacceso extends javax.swing.JInternalFrame {
         lbltotalregistro.setBackground(new java.awt.Color(93, 173, 170));
         lbltotalregistro.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registros:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 2, 12))); // NOI18N
 
-        lblfecha_reg.setBorder(javax.swing.BorderFactory.createTitledBorder("Fecha Registro"));
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(lblfecha_reg, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbltotalregistro, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(553, 553, 553)
+                        .addComponent(lbltotalregistro, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 736, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnbuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+                    .addComponent(btnbuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btneliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnimprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(btnimprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnimprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblfecha_reg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbltotalregistro, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)))
+                .addContainerGap()
+                .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnimprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbltotalregistro, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jLabel5.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
@@ -396,22 +405,22 @@ public class frmacceso extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
@@ -430,7 +439,8 @@ public class frmacceso extends javax.swing.JInternalFrame {
         habilitar();
         btnguardar.setText("Guardar");
         accion = "guardar";
-
+        fechaActual();
+       
     }//GEN-LAST:event_btnnuevoActionPerformed
 
     private void tablalistadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablalistadoMouseClicked
@@ -439,48 +449,52 @@ public class frmacceso extends javax.swing.JInternalFrame {
         habilitar();
         btneliminar.setEnabled(true);
         accion = "editar";
-
+        
         int fila = tablalistado.rowAtPoint(evt.getPoint());
-
+        
         txtidacceso.setText(tablalistado.getValueAt(fila, 0).toString());
         txtidtrabajador.setText(tablalistado.getValueAt(fila, 1).toString());
-        txttrabajador.setText(tablalistado.getValueAt(fila, 2).toString());
-        cboacceso.setSelectedItem(tablalistado.getValueAt(fila, 3).toString());
-        txtlogin.setText(tablalistado.getValueAt(fila, 4).toString());
-        txtpassword.setText(tablalistado.getValueAt(fila, 5).toString());
-        cboestado.setSelectedItem(tablalistado.getValueAt(fila, 6).toString());
-        lblfecha_reg.setText(tablalistado.getValueAt(fila, 7).toString());
-
+        lblnom_trabajador.setText(tablalistado.getValueAt(fila, 2).toString());
+        lblapell_trab.setText(tablalistado.getValueAt(fila, 3).toString());
+        cboacceso.setSelectedItem(tablalistado.getValueAt(fila, 4).toString());
+        lblusuario.setText(tablalistado.getValueAt(fila, 5).toString());
+        txtpassword.setText(tablalistado.getValueAt(fila, 6).toString());
+        cboestado.setSelectedItem(tablalistado.getValueAt(fila, 7).toString());
+        lblfecha_reg.setText(tablalistado.getValueAt(fila, 8).toString());
+        
 
     }//GEN-LAST:event_tablalistadoMouseClicked
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         // TODO add your handling code here:
-        if (txttrabajador.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "INGRESAR TRABAJADOR");
-            txttrabajador.requestFocus();
+        if (lblnom_trabajador.getText().length() == 0) {
+            JOptionPane.showMessageDialog(rootPane, "INGRESAR NOMBRE DEL TRABAJADOR");
+            lblnom_trabajador.requestFocus();
             return;
         }
-        if (txtlogin.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "INGRESAR USUARIO");
-            txtlogin.requestFocus();
+        if (lblapell_trab.getText().length() == 0) {
+            JOptionPane.showMessageDialog(rootPane, "INGRESA APELLIDO DEL TRABAJOR");
+        }
+        if (lblusuario.getText().length() == 0) {
+            JOptionPane.showMessageDialog(rootPane, "INGRESAR USUARIO");
+            lblusuario.requestFocus();
             return;
         }
         if (txtpassword.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "USUARIO CONTRASEÑA");
+            JOptionPane.showMessageDialog(rootPane, "USUARIO CONTRASEÑA");
             txtpassword.requestFocus();
             return;
         }
-
+        
         vacceso dts = new vacceso();
         facceso func = new facceso();
-
+        
         dts.setIdtrabajador(Integer.parseInt(txtidtrabajador.getText()));
-
+        
         int seleccionado = cboacceso.getSelectedIndex();
         dts.setAcceso((String) cboacceso.getItemAt(seleccionado));
-
-        dts.setLogin(txtlogin.getText());
+        
+        dts.setLogin(lblusuario.getText());
         
         dts.setPassword(txtpassword.getText());
         
@@ -498,13 +512,13 @@ public class frmacceso extends javax.swing.JInternalFrame {
         } else if (accion.equals("editar")) {
             dts.setIdacceso(Integer.parseInt(txtidacceso.getText()));
             if (func.editar(dts)) {
-                JOptionPane.showConfirmDialog(rootPane, "REGISTRO EDITADO");
+                JOptionPane.showMessageDialog(rootPane, "REGISTRO EDITADO");
                 mostrar("");
                 inhabilitar();
             }
-
+            
         }
-
+        
 
     }//GEN-LAST:event_btnguardarActionPerformed
 
@@ -519,11 +533,11 @@ public class frmacceso extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if (!txtidacceso.getText().equals("")) {
             int confirmation = JOptionPane.showConfirmDialog(rootPane, "ESTAS SEGURO DE ELIMINARO");
-
+            
             if (confirmation == 0) {
                 facceso func = new facceso();
                 vacceso dts = new vacceso();
-
+                
                 dts.setIdacceso(Integer.parseInt(txtidacceso.getText()));
                 func.eliminar(dts);
                 mostrar("");
@@ -535,22 +549,6 @@ public class frmacceso extends javax.swing.JInternalFrame {
     private void txtidtrabajadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidtrabajadorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtidtrabajadorActionPerformed
-
-    private void txttrabajadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttrabajadorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txttrabajadorActionPerformed
-
-    private void txttrabajadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttrabajadorKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txttrabajadorKeyTyped
-
-    private void txtloginKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtloginKeyTyped
-        // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        if (Character.isDigit(c)) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtloginKeyTyped
 
     private void btnbuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnbuscarKeyTyped
         // TODO add your handling code here:
@@ -614,13 +612,14 @@ public class frmacceso extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    public static javax.swing.JLabel lblapell_trab;
     private javax.swing.JLabel lblfecha_reg;
+    public static javax.swing.JLabel lblnom_trabajador;
     private javax.swing.JLabel lbltotalregistro;
+    public static javax.swing.JLabel lblusuario;
     private javax.swing.JTable tablalistado;
     public static javax.swing.JTextField txtidacceso;
     public static javax.swing.JTextField txtidtrabajador;
-    private javax.swing.JTextField txtlogin;
     private javax.swing.JPasswordField txtpassword;
-    public static javax.swing.JTextField txttrabajador;
     // End of variables declaration//GEN-END:variables
 }
