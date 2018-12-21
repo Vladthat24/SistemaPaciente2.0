@@ -14,7 +14,6 @@ import java.sql.Date;
 public class vpaciente {
     
   private int idpaciente;
-  private int idacceso;
   private String usuario_acceso;
   private String hitoria_clinica;
   private String nombre;
@@ -32,7 +31,6 @@ public class vpaciente {
   private String estado_civil;
   private String tipo_doc;
   private String num_doc;
-  private String grado_instruc;
   private String ocupacion;
   private String religion;
   private String fa_nombres;
@@ -43,9 +41,8 @@ public class vpaciente {
     public vpaciente() {
     }
 
-    public vpaciente(int idpaciente, int idacceso, String usuario_acceso, String hitoria_clinica, String nombre, String apellidos, String tipo_seguro, String direccion, String celular, String email, String fecha_nac, String lugar_nac, String lugar_proc, String sexo, String edad, String fecha_reg, String estado_civil, String tipo_doc, String num_doc, String grado_instruc, String ocupacion, String religion, String fa_nombres, String fa_apellidos, String fa_edad, String fa_direccion) {
+    public vpaciente(int idpaciente, String usuario_acceso, String hitoria_clinica, String nombre, String apellidos, String tipo_seguro, String direccion, String celular, String email, String fecha_nac, String lugar_nac, String lugar_proc, String sexo, String edad, String fecha_reg, String estado_civil, String tipo_doc, String num_doc, String ocupacion, String religion, String fa_nombres, String fa_apellidos, String fa_edad, String fa_direccion) {
         this.idpaciente = idpaciente;
-        this.idacceso = idacceso;
         this.usuario_acceso = usuario_acceso;
         this.hitoria_clinica = hitoria_clinica;
         this.nombre = nombre;
@@ -63,7 +60,6 @@ public class vpaciente {
         this.estado_civil = estado_civil;
         this.tipo_doc = tipo_doc;
         this.num_doc = num_doc;
-        this.grado_instruc = grado_instruc;
         this.ocupacion = ocupacion;
         this.religion = religion;
         this.fa_nombres = fa_nombres;
@@ -78,14 +74,6 @@ public class vpaciente {
 
     public void setIdpaciente(int idpaciente) {
         this.idpaciente = idpaciente;
-    }
-
-    public int getIdacceso() {
-        return idacceso;
-    }
-
-    public void setIdacceso(int idacceso) {
-        this.idacceso = idacceso;
     }
 
     public String getUsuario_acceso() {
@@ -224,14 +212,6 @@ public class vpaciente {
         this.num_doc = num_doc;
     }
 
-    public String getGrado_instruc() {
-        return grado_instruc;
-    }
-
-    public void setGrado_instruc(String grado_instruc) {
-        this.grado_instruc = grado_instruc;
-    }
-
     public String getOcupacion() {
         return ocupacion;
     }
@@ -280,6 +260,6 @@ public class vpaciente {
         this.fa_direccion = fa_direccion;
     }
 
-    
+ 
 }
 

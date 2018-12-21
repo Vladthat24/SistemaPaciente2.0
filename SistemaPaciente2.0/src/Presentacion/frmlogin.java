@@ -38,8 +38,8 @@ public class frmlogin extends javax.swing.JFrame {
         initComponents();
         lblprocesar.setEnabled(false);
         jbarprocesar.setEnabled(false);
-        jScrollPane1.setEnabled(false);
-        this.setTitle(".::ACCESO SAPT::.");
+        jScrollPane1.setVisible(false);
+        this.setTitle(".:REGISTRO DE PACIENTE:.");
         this.setLocationRelativeTo(null);
 //        setIconImage(new ImageIcon(getClass().getResource("../Files/icologin.png")).getImage());
     }
@@ -58,7 +58,7 @@ public class frmlogin extends javax.swing.JFrame {
                 form.setVisible(true);
                 setVisible(false);
                 frminicio.lblidacceso.setText(tablalistado.getValueAt(0, 0).toString());
-                frminicio.lblacceso.setText(tablalistado.getValueAt(0, 3).toString());
+
                 if (!frminicio.lblacceso.getText().equals("ADMINISTRADOR")) {
                     frminicio.menutrabajador.setEnabled(false);
                 }
@@ -88,54 +88,30 @@ public class frmlogin extends javax.swing.JFrame {
             facceso func = new facceso();
             vacceso dts = new vacceso();
 
-//            dts.setLogin(txtusuario.getText());
-//            dts.setPassword(txtpassword.getText());
-//
-//            modelo = func.login(dts.getLogin(), dts.getPassword());
-//            tablalistado.setModel(modelo);
-            String usuario, pass;
-            int cont = 0;
+            dts.setLogin(txtusuario.getText());
+            dts.setPassword(txtpassword.getText());
 
-            while (cont < 3) {
-                if (txtusuario.getText().length() == 0 && txtpassword.getText().length() == 0) {
-                    usuario = txtusuario.getText();
-                    pass = txtpassword.getText();
-                    dts.setLogin(usuario);
-                    dts.setPassword(pass);
+            modelo = func.login(dts.getLogin(), dts.getPassword());
+            tablalistado.setModel(modelo);
 
-                }
-                modelo = func.login(dts.getLogin(), dts.getPassword());
-                tablalistado.setModel(modelo);
+            modelo = func.login(dts.getLogin(), dts.getPassword());
+            tablalistado.setModel(modelo);
 
-                if (0 < func.totalregistros) {
+            if (func.totalregistros > 0) {
+                cont = -1;
+                jbarprocesar.setValue(0);
+                jbarprocesar.setStringPainted(true);
+                lblprocesar.setEnabled(true);
+                tiempo = new Timer(TWO_SECOND, new TimerListener());
+//                frmpaciente.lblusuario_acceso.setText(tablalistado.getValueAt(0, 2).toString());
+                activar();
 
-                    cont = -1;
-                    jbarprocesar.setValue(0);
-                    jbarprocesar.setStringPainted(true);
-                    tiempo = new Timer(TWO_SECOND, new TimerListener());
-                    activar();
-                } else {
-                    JOptionPane.showMessageDialog(rootPane, "ACCESO INCORRECTO");
-                    jbarprocesar.setEnabled(false);
-                    lblprocesar.setEnabled(false);
-                }
-                cont++;
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "USUARIO INCORRECTO", "Acceso al Sistema", JOptionPane.ERROR_MESSAGE);
+                jbarprocesar.setEnabled(false);
+                lblprocesar.setEnabled(false);
                 limpiar();
             }
-            JOptionPane.showMessageDialog(rootPane, "ACCESO DENEGADO", "Acceso al Sistema", JOptionPane.ERROR_MESSAGE);
-
-//            if (func.totalregistros > 0) {
-//                cont=-1;
-//                jbarprocesar.setValue(0);
-//                jbarprocesar.setStringPainted(true);
-//                tiempo= new Timer(TWO_SECOND,new TimerListener());
-//                activar();
-//
-//            } else {
-//                JOptionPane.showMessageDialog(rootPane, "Acceso Denegado", "Acceso al Sistema", JOptionPane.ERROR_MESSAGE);
-//                jbarprocesar.setEnabled(false);
-//                lblprocesar.setEnabled(false);
-//            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e + " Error FrmLogin");
         }
@@ -152,7 +128,6 @@ public class frmlogin extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jbarprocesar = new javax.swing.JProgressBar();
         lblprocesar = new javax.swing.JLabel();
@@ -160,10 +135,10 @@ public class frmlogin extends javax.swing.JFrame {
         txtusuario = new javax.swing.JTextField();
         txtpassword = new javax.swing.JPasswordField();
         btningresar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablalistado = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -172,8 +147,6 @@ public class frmlogin extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(new javax.swing.border.MatteBorder(null));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/Sin título.jpg"))); // NOI18N
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -211,19 +184,6 @@ public class frmlogin extends javax.swing.JFrame {
             }
         });
 
-        tablalistado.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(tablalistado);
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -237,9 +197,7 @@ public class frmlogin extends javax.swing.JFrame {
                             .addComponent(txtusuario)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
-                        .addComponent(btningresar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btningresar)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -250,49 +208,59 @@ public class frmlogin extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btningresar)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btningresar)
                 .addContainerGap(55, Short.MAX_VALUE))
         );
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/imagendelogo.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/pacientes.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbarprocesar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jbarprocesar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblprocesar)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblprocesar)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
+                .addGap(19, 19, 19)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbarprocesar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblprocesar)
                 .addGap(5, 5, 5))
         );
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel6.setText("\"Año del Buen Servicio al Ciudadano\"");
+
+        tablalistado.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tablalistado);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -304,26 +272,25 @@ public class frmlogin extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(132, 132, 132)
-                                .addComponent(jLabel6))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(71, 71, 71)
-                                .addComponent(jLabel1)))
+                        .addGap(135, 135, 135)
+                        .addComponent(jLabel6)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 862, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(46, 46, 46)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(29, 29, 29)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -347,11 +314,11 @@ public class frmlogin extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -430,7 +397,6 @@ public class frmlogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btningresar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -439,7 +405,7 @@ public class frmlogin extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JProgressBar jbarprocesar;
     private javax.swing.JLabel lblprocesar;
-    private javax.swing.JTable tablalistado;
+    public static javax.swing.JTable tablalistado;
     private javax.swing.JPasswordField txtpassword;
     private javax.swing.JTextField txtusuario;
     // End of variables declaration//GEN-END:variables

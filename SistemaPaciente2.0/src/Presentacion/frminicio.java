@@ -183,7 +183,7 @@ public class frminicio extends javax.swing.JFrame {
 
     private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
         // TODO add your handling code here:
-        frmh_paciente form = new frmh_paciente();
+        frmpaciente form = new frmpaciente();
         escritorio.add(form);
         form.toFront();
         form.setVisible(true);
