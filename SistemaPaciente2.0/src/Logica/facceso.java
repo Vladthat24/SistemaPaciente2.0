@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -30,7 +31,7 @@ public class facceso {
     public DefaultTableModel mostrar(String buscar) {
         DefaultTableModel modelo;
 
-        String[] titulos = {"ID", "IDTRABAJADOR", "NOMBRE DEL TRABJ.","APELL. DEL TRABJ.", "ACCESO", "USUARIO", "CONTRASEÑA", "ESTADO","FECHA REG."};
+        String[] titulos = {"ID", "IDTRABAJADOR", "NOMBRE DEL TRABJ.", "APELL. DEL TRABJ.", "ACCESO", "USUARIO", "CONTRASEÑA", "ESTADO", "FECHA REG."};
 
         String[] registro = new String[9];
 
@@ -38,9 +39,9 @@ public class facceso {
         modelo = new DefaultTableModel(null, titulos);
 //        sSQL = "select idacceso,acceso,idtrabajador,login,password,estado from acceso where idtrabajador IN (select nombre from persona_trabajador where idtrabajador=idtrabajador)";
 
-        sSQL = "select idacceso,idtrabajador,"
-                + "(select nombre from trabajador where idtrabajador=idtrabajador) as tnombre,"
-                + "(select apellidos from trabajador where idtrabajador=idtrabajador) as tapellidos,"
+        sSQL = "select idacceso,id_trabajador,"
+                + "(select nombre from trabajador where idtrabajador=id_trabajador) as tnombre,"
+                + "(select apellidos from trabajador where idtrabajador=id_trabajador) as tapellidos,"
                 + "acceso,login,password,estado,fecha_reg from acceso where login like '%" + buscar + "%' order by idacceso desc";
 
         try {
@@ -49,7 +50,7 @@ public class facceso {
 
             while (rs.next()) {
                 registro[0] = rs.getString("idacceso");
-                registro[1] = rs.getString("idtrabajador");
+                registro[1] = rs.getString("id_trabajador");
                 registro[2] = rs.getString("tnombre");
                 registro[3] = rs.getString("tapellidos");
                 registro[4] = rs.getString("acceso");
@@ -72,14 +73,13 @@ public class facceso {
     }
 
     public boolean insertar(vacceso dts) {
-        sSQL = "insert into acceso (idtrabajador,acceso,login,password,estado,fecha_reg)"
+        sSQL = "insert into acceso (id_trabajador,acceso,login,password,estado,fecha_reg)"
                 + "values (?,?,?,?,?,?)";
 
         try {
 
             PreparedStatement pst = cn.prepareStatement(sSQL);
 
- 
             pst.setInt(1, dts.getIdtrabajador());
             pst.setString(2, dts.getAcceso());
             pst.setString(3, dts.getLogin());
@@ -103,13 +103,12 @@ public class facceso {
     }
 
     public boolean editar(vacceso dts) {
-        sSQL = "update acceso set idtrabajador=?,acceso=?,login=?,password=?,estado=?,fecha_reg=?";
+        sSQL = "update acceso set id_trabajador=?,acceso=?,login=?,password=?,estado=?,fecha_reg=?";
 
         try {
 
             PreparedStatement pst = cn.prepareStatement(sSQL);
 
-           
             pst.setInt(1, dts.getIdtrabajador());
             pst.setString(2, dts.getAcceso());
             pst.setString(3, dts.getLogin());
@@ -159,30 +158,31 @@ public class facceso {
 
     public DefaultTableModel login(String login, String password) {
         DefaultTableModel modelo;
-        String[] titulos = {"IDACCESO", "IDTRABAJADOR", "TRABAJADOR", "ACCESO", "USUARIO", "CONTRASEÑA", "ESTADO","FECHA REG."};
+        String[] titulos = {"IDACCESO", "IDTRABAJADOR", "TRABAJADOR", "ACCESO", "USUARIO", "CONTRASEÑA", "ESTADO", "FECHA REG."};
         String[] registros = new String[8];
 
         totalregistros = 0;
 
         modelo = new DefaultTableModel(null, titulos);
 
-        sSQL = "SELECT idacceso,idtrabajador,"
-                + "(select nombre from trabajador where idtrabajador=idtrabajador) as nombretrab,"
-                + "(select apellidos from trabajador where idtrabajador=idtrabajador)as apellidos,"
+        sSQL = "SELECT idacceso,id_trabajador,"
+                + "(select nombre from trabajador where idtrabajador=id_trabajador) as nombretrab,"
+                + "(select apellidos from trabajador where idtrabajador=id_trabajador)as apellidos,"
                 + "acceso,login,password,estado,fecha_reg from acceso where login='" + login + "' and password='" + password + "' and estado='ACTIVO'";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
 
             while (rs.next()) {
+
                 registros[0] = rs.getString("idacceso");
-                registros[1] = rs.getString("idtrabajador");
+                registros[1] = rs.getString("id_trabajador");
                 registros[2] = rs.getString("nombretrab") + " " + rs.getString("apellidos");
                 registros[3] = rs.getString("acceso");
                 registros[4] = rs.getString("login");
                 registros[5] = rs.getString("password");
                 registros[6] = rs.getString("estado");
-                registros[7] =rs.getString("fecha_reg");
+                registros[7] = rs.getString("fecha_reg");
 
                 totalregistros = totalregistros + 1;
                 modelo.addRow(registros);
@@ -193,4 +193,23 @@ public class facceso {
             return null;
         }
     }
+
+    public void id_Trabajador(int id_trabajador) {
+        vacceso dts;
+        ResultSet res;
+        String sql="select id_trabajador from acceso where id_trabajador='"+id_trabajador+'"';
+        try {
+            
+            PreparedStatement pstm = cn.prepareStatement(sql);
+            res=pstm.executeQuery();
+            if(res.next()){
+                JOptionPane.showMessageDialog(null, "El usuario ya esta existe");
+            }
+            
+    
+        } catch (Exception e) {
+        }
+    }
+
+
 }

@@ -25,26 +25,26 @@ public class frmacceso extends javax.swing.JInternalFrame {
         initComponents();
         mostrar("");
         inhabilitar();
-        
+
     }
     private String accion = "guardar";
     public static int idusuario;
-    
+
     void ocultar_columnas() {
         tablalistado.getColumnModel().getColumn(0).setMaxWidth(0);
         tablalistado.getColumnModel().getColumn(0).setMinWidth(0);
         tablalistado.getColumnModel().getColumn(0).setPreferredWidth(0);
-        
+
         tablalistado.getColumnModel().getColumn(1).setMaxWidth(0);
         tablalistado.getColumnModel().getColumn(1).setMinWidth(0);
         tablalistado.getColumnModel().getColumn(1).setPreferredWidth(0);
-        
+
         tablalistado.getColumnModel().getColumn(6).setMaxWidth(0);
         tablalistado.getColumnModel().getColumn(6).setMinWidth(0);
         tablalistado.getColumnModel().getColumn(6).setPreferredWidth(0);
-        
+
     }
-    
+
     void fechaActual() {
         int agosto = 8;
         int septiembre = 9;
@@ -78,10 +78,10 @@ public class frmacceso extends javax.swing.JInternalFrame {
             mes = "Diciembre";
         }
         int fhoy_year = today.get(Calendar.YEAR);
-        
+
         lblfecha_reg.setText(fhoy_dia + " de " + mes + " del " + fhoy_year);
     }
-    
+
     void inhabilitar() {
         txtidacceso.setVisible(false);
         txtidtrabajador.setVisible(false);
@@ -92,22 +92,22 @@ public class frmacceso extends javax.swing.JInternalFrame {
         txtpassword.setEnabled(false);
         lblfecha_reg.setEnabled(false);
         cboacceso.setEnabled(false);
-        
+
         btnbuscar.setEnabled(false);
         btneliminar.setEnabled(false);
         btnguardar.setEnabled(false);
         btnimprimir.setEnabled(false);
         cboestado.setEnabled(false);
-        
+
         lblnom_trabajador.setText("");
         lblapell_trab.setText("");
         lblusuario.setText("");
         txtpassword.setText("");
-        
+
     }
-    
+
     void habilitar() {
-        
+
         txtidacceso.setVisible(false);
         txtidtrabajador.setVisible(false);
         lblnom_trabajador.setEnabled(false);
@@ -115,29 +115,30 @@ public class frmacceso extends javax.swing.JInternalFrame {
         lblusuario.setEnabled(true);
         txtpassword.setEnabled(true);
         lblfecha_reg.setEnabled(true);
-        
+
         cboacceso.setEnabled(true);
         cboestado.setEnabled(true);
-        
+
         btnbuscar.setEnabled(true);
         btneliminar.setEnabled(true);
         btnguardar.setEnabled(true);
         btnimprimir.setEnabled(true);
         btntrabajador.setEnabled(true);
-        
+
         lblnom_trabajador.setText("");
         lblapell_trab.setText("");
         lblusuario.setText("");
         txtpassword.setText("");
+        lblusuario.setText("");
     }
-    
+
     void mostrar(String buscar) {
         try {
             DefaultTableModel modelo;
             facceso func = new facceso();
             vacceso dts = new vacceso();
             modelo = func.mostrar(buscar);
-            
+
             tablalistado.setModel(modelo);
             ocultar_columnas();
             lbltotalregistro.setText("Total de Registros " + Integer.toString(func.totalregistros));
@@ -145,7 +146,7 @@ public class frmacceso extends javax.swing.JInternalFrame {
             JOptionPane.showConfirmDialog(rootPane, e + "ERROR FRMACCESO 01");
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -440,7 +441,7 @@ public class frmacceso extends javax.swing.JInternalFrame {
         btnguardar.setText("Guardar");
         accion = "guardar";
         fechaActual();
-       
+
     }//GEN-LAST:event_btnnuevoActionPerformed
 
     private void tablalistadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablalistadoMouseClicked
@@ -449,9 +450,9 @@ public class frmacceso extends javax.swing.JInternalFrame {
         habilitar();
         btneliminar.setEnabled(true);
         accion = "editar";
-        
+
         int fila = tablalistado.rowAtPoint(evt.getPoint());
-        
+
         txtidacceso.setText(tablalistado.getValueAt(fila, 0).toString());
         txtidtrabajador.setText(tablalistado.getValueAt(fila, 1).toString());
         lblnom_trabajador.setText(tablalistado.getValueAt(fila, 2).toString());
@@ -461,7 +462,7 @@ public class frmacceso extends javax.swing.JInternalFrame {
         txtpassword.setText(tablalistado.getValueAt(fila, 6).toString());
         cboestado.setSelectedItem(tablalistado.getValueAt(fila, 7).toString());
         lblfecha_reg.setText(tablalistado.getValueAt(fila, 8).toString());
-        
+
 
     }//GEN-LAST:event_tablalistadoMouseClicked
 
@@ -485,27 +486,28 @@ public class frmacceso extends javax.swing.JInternalFrame {
             txtpassword.requestFocus();
             return;
         }
-        
+
         vacceso dts = new vacceso();
         facceso func = new facceso();
-        
+
         dts.setIdtrabajador(Integer.parseInt(txtidtrabajador.getText()));
-        
+
         int seleccionado = cboacceso.getSelectedIndex();
         dts.setAcceso((String) cboacceso.getItemAt(seleccionado));
-        
+
         dts.setLogin(lblusuario.getText());
-        
+
         dts.setPassword(txtpassword.getText());
-        
+
         seleccionado = cboestado.getSelectedIndex();
         dts.setEstado((String) cboestado.getItemAt(seleccionado));
-        
+
         dts.setFecha_reg(lblfecha_reg.getText());
-        
+
         if (accion.equals("guardar")) {
             if (func.insertar(dts)) {
                 JOptionPane.showMessageDialog(rootPane, "REGISTRO GUARDADO");
+//                func.id_Trabajador(Integer.parseInt(txtidtrabajador.getText()));
                 mostrar("");
                 inhabilitar();
             }
@@ -516,9 +518,9 @@ public class frmacceso extends javax.swing.JInternalFrame {
                 mostrar("");
                 inhabilitar();
             }
-            
+
         }
-        
+
 
     }//GEN-LAST:event_btnguardarActionPerformed
 
@@ -533,11 +535,11 @@ public class frmacceso extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if (!txtidacceso.getText().equals("")) {
             int confirmation = JOptionPane.showConfirmDialog(rootPane, "ESTAS SEGURO DE ELIMINARO");
-            
+
             if (confirmation == 0) {
                 facceso func = new facceso();
                 vacceso dts = new vacceso();
-                
+
                 dts.setIdacceso(Integer.parseInt(txtidacceso.getText()));
                 func.eliminar(dts);
                 mostrar("");

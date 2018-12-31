@@ -184,7 +184,7 @@ public class frmpaciente extends javax.swing.JInternalFrame {
         txtfa_apellidos.setEnabled(false);
         txtfa_direccion.setEnabled(false);
         txtfa_edad.setEnabled(false);
-        
+
         checkselecction.setEnabled(false);
 
         btnimprimir.setEnabled(false);
@@ -577,6 +577,9 @@ public class frmpaciente extends javax.swing.JInternalFrame {
             }
         });
         txtfecha_nacimiento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtfecha_nacimientoKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtfecha_nacimientoKeyTyped(evt);
             }
@@ -790,11 +793,12 @@ public class frmpaciente extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(txtidpaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtapellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblusuario_acceso, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txthistoria_clinica, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtnombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtapellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblusuario_acceso, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtdireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -833,8 +837,6 @@ public class frmpaciente extends javax.swing.JInternalFrame {
                     .addComponent(cboreligion, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
-
-        txtlugar_nac.getAccessibleContext().setAccessibleName("Lugar de Nacimiento:");
 
         jTabbedPane1.addTab("Registro de Paciente", jPanel1);
 
@@ -1195,6 +1197,22 @@ public class frmpaciente extends javax.swing.JInternalFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtocupacionKeyTyped
+
+    private void txtfecha_nacimientoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfecha_nacimientoKeyPressed
+        // ALGORITMO PARA SACAR LA EDAD Y LANZARLO AL LBLEDAD
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate fechamacimineto = LocalDate.parse(txtfecha_nacimiento.getText(), date);
+            LocalDate fechaactual = LocalDate.now();
+
+            Period periodo = Period.between(fechamacimineto, fechaactual);
+            String resultado = (+periodo.getYears() + " Años " + periodo.getMonths() + " Meses" + " y " + periodo.getDays() + " Dias");
+
+            lbledad.setText(resultado);
+        }
+
+
+    }//GEN-LAST:event_txtfecha_nacimientoKeyPressed
 
     /**
      * @param args the command line arguments
