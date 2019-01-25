@@ -24,22 +24,17 @@ public class fpaciente {
     public DefaultTableModel mostrar(String buscar) {
         DefaultTableModel modelo;
 
-        String[] titulos = {"ID","USUARIO", "H. CLINICA", "NOMBRES", "APELLIDOS", "TIPO SEGURO", "DIRECCION", "CELULAR", "EMAIL", "FECHA NAC.", "LUGAR NAC.",
-            "LUGAR PROC.", "SEXO", "EDAD", "FECHA REG.", "ESTADO CIVIL", "TIPO DOC.", "N° DOC.","OCUPACION", "RELIGION", "FA NOMBRES", "FA APELLIDOS",
+        String[] titulos = {"ID", "USUARIO", "H. CLINICA", "NOMBRES", "APELLIDOS", "TIPO SEGURO", "DIRECCION", "CELULAR", "EMAIL", "FECHA NAC.", "LUGAR NAC.",
+            "LUGAR PROC.", "SEXO", "EDAD", "FECHA REG.", "ESTADO CIVIL", "TIPO DOC.", "N° DOC.", "OCUPACION", "RELIGION", "FA NOMBRES", "FA APELLIDOS",
             "FA EDAD", "FA DIREC."};
 
         String[] registro = new String[24];
 
         totalregistros = 0;
         modelo = new DefaultTableModel(null, titulos);
-
-        sSQL = "select idpaciente,usuario_acceso,historia_clinica,nombre,apellidos,"
-                + "tipo_seguro,direccion,celular,"
-                + "email,fecha_nac,lugar_nac,lugar_proc,sexo,edad,fecha_reg,estado_civil,tipo_doc,num_doc,"
-                + "ocupacion,"
-                + "religion,fa_nombres,fa_apellidos,fa_edad,fa_direccion"
-                + " from paciente where num_doc like '%" + buscar + "%'order by idpaciente desc";
-
+        
+        sSQL = "select * from paciente where num_doc like '%"+buscar+"%'"
+                + " OR apellidos like '%"+buscar+"%' order by idpaciente desc limit 50000";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
@@ -90,7 +85,7 @@ public class fpaciente {
                 + "email,fecha_nac,lugar_nac,lugar_proc,sexo,edad,fecha_reg,estado_civil,tipo_doc,num_doc,"
                 + "ocupacion,"
                 + "religion,fa_nombres,fa_apellidos,fa_edad,fa_direccion)"
-                + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
 
             PreparedStatement pst = cn.prepareStatement(sSQL);
@@ -122,7 +117,7 @@ public class fpaciente {
             int n = pst.executeUpdate();
 
             if (n != 0) {
-
+                return true;
             } else {
                 return false;
             }
@@ -131,7 +126,7 @@ public class fpaciente {
             JOptionPane.showConfirmDialog(null, e + "PACIENTE INSERT 02");
             return false;
         }
-        return false;
+
     }
 
     public boolean editar(vpaciente dts) {
@@ -148,7 +143,6 @@ public class fpaciente {
         try {
 
             PreparedStatement pst = cn.prepareStatement(sSQL);
-
 
             pst.setString(1, dts.getUsuario_acceso());
             pst.setString(2, dts.getHitoria_clinica());
@@ -173,6 +167,7 @@ public class fpaciente {
             pst.setString(21, dts.getFa_apellidos());
             pst.setString(22, dts.getFa_edad());
             pst.setString(23, dts.getFa_direccion());
+            pst.setInt(24, dts.getIdpaciente());
 
             int n = pst.executeUpdate();
 

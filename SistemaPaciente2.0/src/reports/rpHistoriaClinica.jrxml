@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpHistoriaClinica" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d049d867-d6e1-4afc-979b-14ab80bb1087">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fecha_inicial" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha_final" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     paciente.`idpaciente` AS paciente_idpaciente,
+     paciente.`usuario_acceso` AS paciente_usuario_acceso,
+     paciente.`historia_clinica` AS paciente_historia_clinica,
+     paciente.`nombre` AS paciente_nombre,
+     paciente.`apellidos` AS paciente_apellidos,
+     paciente.`tipo_seguro` AS paciente_tipo_seguro,
+     paciente.`direccion` AS paciente_direccion,
+     paciente.`celular` AS paciente_celular,
+     paciente.`email` AS paciente_email,
+     paciente.`fecha_nac` AS paciente_fecha_nac,
+     paciente.`lugar_nac` AS paciente_lugar_nac,
+     paciente.`lugar_proc` AS paciente_lugar_proc,
+     paciente.`sexo` AS paciente_sexo,
+     paciente.`edad` AS paciente_edad,
+     paciente.`fecha_reg` AS paciente_fecha_reg,
+     paciente.`estado_civil` AS paciente_estado_civil,
+     paciente.`tipo_doc` AS paciente_tipo_doc,
+     paciente.`num_doc` AS paciente_num_doc,
+     paciente.`ocupacion` AS paciente_ocupacion,
+     paciente.`religion` AS paciente_religion
+FROM
+     `paciente` paciente
+WHERE paciente.`fecha_reg` between $P{fecha_inicial} and $P{fecha_final} order by paciente.`historia_clinica`]]>
+	</queryString>
+	<field name="paciente_idpaciente" class="java.lang.Integer"/>
+	<field name="paciente_usuario_acceso" class="java.lang.String"/>
+	<field name="paciente_historia_clinica" class="java.lang.String"/>
+	<field name="paciente_nombre" class="java.lang.String"/>
+	<field name="paciente_apellidos" class="java.lang.String"/>
+	<field name="paciente_tipo_seguro" class="java.lang.String"/>
+	<field name="paciente_direccion" class="java.lang.String"/>
+	<field name="paciente_celular" class="java.lang.String"/>
+	<field name="paciente_email" class="java.lang.String"/>
+	<field name="paciente_fecha_nac" class="java.lang.String"/>
+	<field name="paciente_lugar_nac" class="java.lang.String"/>
+	<field name="paciente_lugar_proc" class="java.lang.String"/>
+	<field name="paciente_sexo" class="java.lang.String"/>
+	<field name="paciente_edad" class="java.lang.String"/>
+	<field name="paciente_fecha_reg" class="java.lang.String"/>
+	<field name="paciente_estado_civil" class="java.lang.String"/>
+	<field name="paciente_tipo_doc" class="java.lang.String"/>
+	<field name="paciente_num_doc" class="java.lang.String"/>
+	<field name="paciente_ocupacion" class="java.lang.String"/>
+	<field name="paciente_religion" class="java.lang.String"/>
+	<group name="Historia Clinica">
+		<groupExpression><![CDATA[$F{paciente_historia_clinica}]]></groupExpression>
+		<groupHeader>
+			<band height="19">
+				<textField>
+					<reportElement mode="Opaque" x="404" y="0" width="151" height="18" forecolor="#FFFFFF" backcolor="#999999" uuid="33de7f9f-0e7c-4601-9206-fa7a92fe2721"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{paciente_historia_clinica}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="1" y="0" width="403" height="18" forecolor="#FFFFFF" backcolor="#999999" uuid="aa19b0c2-0ae5-4d9c-bba3-deba67171e4c"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[N° HISTORIA CLINICA:]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Tipo de Doc">
+		<groupExpression><![CDATA[$F{paciente_tipo_doc}]]></groupExpression>
+		<groupHeader>
+			<band height="22">
+				<textField>
+					<reportElement mode="Opaque" x="404" y="2" width="151" height="18" forecolor="#FFFFFF" backcolor="#999999" uuid="f9e01852-ef95-4337-ad05-419207d47ee8"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{paciente_tipo_doc}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="2" width="404" height="18" forecolor="#FFFFFF" backcolor="#999999" uuid="818fb2cf-bd06-4b7c-96f3-6ab1ab775985"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[TIPO DE DOCUMENTO:]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="N Doc">
+		<groupExpression><![CDATA[$F{paciente_num_doc}]]></groupExpression>
+		<groupHeader>
+			<band height="22">
+				<textField>
+					<reportElement mode="Opaque" x="404" y="0" width="151" height="20" forecolor="#FFFFFF" backcolor="#999999" uuid="962f1fed-fd56-476a-9609-cba9d978bc44"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{paciente_num_doc}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="404" height="20" forecolor="#FFFFFF" backcolor="#999999" uuid="7d1bba4f-0744-465b-9dcb-ea59fe0cdebd"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[NUMERO DE DOCUMENTO:]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Nombre">
+		<groupExpression><![CDATA[$F{paciente_nombre}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField>
+					<reportElement x="144" y="0" width="411" height="20" uuid="11914f27-5a12-4822-8a09-58a9d2ccbdd9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{paciente_nombre}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="0" y="-1" width="144" height="21" backcolor="#5990BD" uuid="9c590bee-3b38-4c8f-952b-6f59d3d3b5cd"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[NOMBRE:	]]></text>
+				</staticText>
+				<line>
+					<reportElement x="1" y="19" width="554" height="1" uuid="65363219-4b9a-4b24-abfb-927b86276a6e"/>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Apellidos">
+		<groupExpression><![CDATA[$F{paciente_apellidos}]]></groupExpression>
+		<groupHeader>
+			<band height="21">
+				<textField>
+					<reportElement x="144" y="0" width="411" height="20" uuid="bfbe45da-1d84-4d25-baac-d9083ef1bd43"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{paciente_apellidos}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="0" y="0" width="144" height="21" backcolor="#5990BD" uuid="5d81ac27-651c-4300-9f0e-a0859e4ab412"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[APELLIDOS:]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Tipo de Seguro">
+		<groupExpression><![CDATA[$F{paciente_tipo_seguro}]]></groupExpression>
+		<groupHeader>
+			<band height="21">
+				<textField>
+					<reportElement x="144" y="0" width="411" height="20" uuid="df205073-7d8c-461b-896e-79d9b048c83e"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{paciente_tipo_seguro}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="0" y="-1" width="144" height="21" backcolor="#5990BD" uuid="9879d616-6e9b-425d-ae89-2a306243f7ed"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[TIPO DE SEGURO:]]></text>
+				</staticText>
+				<line>
+					<reportElement x="1" y="0" width="554" height="1" uuid="a12dfb42-72a0-4de8-a3e6-94bf9fe1f84f"/>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Direccion">
+		<groupExpression><![CDATA[$F{paciente_direccion}]]></groupExpression>
+		<groupHeader>
+			<band height="22">
+				<textField>
+					<reportElement x="144" y="0" width="411" height="20" uuid="2198936a-7a03-4c4f-83ed-4a575bc76a25"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{paciente_direccion}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="0" y="-1" width="144" height="22" backcolor="#5990BD" uuid="6ede1e45-a9b2-44bc-a391-973c30fc0e88"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[DIRECCION:]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="0" width="554" height="1" uuid="7dc44d8e-6dba-4732-8f1e-224bc62693b7"/>
+				</line>
+				<line>
+					<reportElement x="0" y="21" width="554" height="1" uuid="354e80ea-65a2-4abb-8401-0d4d74e545df"/>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Celular">
+		<groupExpression><![CDATA[$F{paciente_celular}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField>
+					<reportElement x="144" y="0" width="411" height="20" uuid="97ad9662-08c4-49b4-82f9-cc3c6a1a2789"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{paciente_celular}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="0" y="-1" width="144" height="21" backcolor="#5990BD" uuid="ea118147-e562-4e9e-98dd-8bf103d1711e"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[CELULAR/TELEFONO:]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Email">
+		<groupExpression><![CDATA[$F{paciente_email}]]></groupExpression>
+		<groupHeader>
+			<band height="22">
+				<textField>
+					<reportElement x="144" y="0" width="411" height="20" uuid="3d4e45e8-c7d9-48fa-bb97-34cba2b3063b"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{paciente_email}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="0" y="1" width="144" height="21" backcolor="#5990BD" uuid="34fade7a-74d5-438c-8a87-cc1e8e62414e"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[CORREO ELECTRONICO:]]></text>
+				</staticText>
+				<line>
+					<reportElement x="1" y="0" width="554" height="1" uuid="239a7915-4413-476e-95c1-f58547723930"/>
+				</line>
+				<line>
+					<reportElement x="1" y="21" width="554" height="1" uuid="5dc03032-41ef-49c7-86f2-242c93c3d15a"/>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Fecha Nacimiento">
+		<groupExpression><![CDATA[$F{paciente_fecha_nac}]]></groupExpression>
+		<groupHeader>
+			<band height="23">
+				<textField>
+					<reportElement x="144" y="0" width="411" height="20" uuid="313a32ff-6520-4f38-b50f-b083c8e8d384"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{paciente_fecha_nac}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="1" y="0" width="143" height="21" backcolor="#5990BD" uuid="5667e106-92a0-4860-ad01-b5ff1307db25"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[FECHA NACIMIENTO:]]></text>
+				</staticText>
+				<line>
+					<reportElement x="1" y="22" width="554" height="1" uuid="95d2f892-54de-42f0-b2dd-9d4ffe91cb91"/>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Lugar Nacimiento">
+		<groupExpression><![CDATA[$F{paciente_lugar_nac}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField>
+					<reportElement x="144" y="0" width="411" height="20" uuid="4577f753-4357-4455-99b0-152ce2bff6f4"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{paciente_lugar_nac}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="0" y="-3" width="144" height="23" backcolor="#5990BD" uuid="b895e5f8-5c26-4a99-b141-7f9838057d83"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[LUGAR DE NACIMIENTO:]]></text>
+				</staticText>
+				<line>
+					<reportElement x="1" y="19" width="554" height="1" uuid="3d6d735c-bf35-4e39-b15f-25dbb438b6bd"/>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Lugar de Procedencia">
+		<groupExpression><![CDATA[$F{paciente_lugar_proc}]]></groupExpression>
+		<groupHeader>
+			<band height="22">
+				<textField>
+					<reportElement x="144" y="0" width="411" height="20" uuid="16f89a11-f74c-496f-8795-89d21a968cd5"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{paciente_lugar_proc}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="0" y="0" width="144" height="22" backcolor="#5990BD" uuid="8464cc74-1dcb-4677-97e1-198edf28d470"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[LUGAR DE PROCEDENCIA:]]></text>
+				</staticText>
+				<line>
+					<reportElement x="1" y="20" width="554" height="1" uuid="fc7c004a-4bbc-4572-b5fd-c8bfefc6bac0"/>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Sexo">
+		<groupExpression><![CDATA[$F{paciente_sexo}]]></groupExpression>
+		<groupHeader>
+			<band height="21">
+				<textField>
+					<reportElement x="144" y="0" width="411" height="20" uuid="a3f0112b-3d7d-4d1b-9fc0-359047257b29"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{paciente_sexo}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="0" y="-1" width="144" height="21" backcolor="#5990BD" uuid="bab19a67-ff2a-47ce-ad00-a2dc760c1bd1"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[SEXO:]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Fecha Edad">
+		<groupExpression><![CDATA[$F{paciente_edad}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField>
+					<reportElement x="144" y="0" width="411" height="20" uuid="d2741f40-05fe-4357-9d9c-96f906d36072"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{paciente_edad}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="0" y="-3" width="144" height="23" backcolor="#5990BD" uuid="507b2b63-bf13-4a83-b65b-01e16aa453fb"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[EDAD:]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="0" width="554" height="1" uuid="b6bdf2bb-d874-4cc7-8392-0dbdcc85ad87"/>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Fecha Registro">
+		<groupExpression><![CDATA[$F{paciente_fecha_reg}]]></groupExpression>
+		<groupHeader>
+			<band height="21">
+				<textField>
+					<reportElement x="144" y="1" width="411" height="20" uuid="b4aeb0e0-b01d-44f7-be81-915c0f93fa88"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{paciente_fecha_reg}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="0" y="0" width="144" height="21" backcolor="#5990BD" uuid="8b66416f-c7cc-412f-90a2-41094020441d"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[FECHA DE REGISTRO:]]></text>
+				</staticText>
+				<line>
+					<reportElement x="1" y="0" width="554" height="1" uuid="2281f10e-2162-48ae-8d0c-29c98898c247"/>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Estado Civil">
+		<groupExpression><![CDATA[$F{paciente_estado_civil}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField>
+					<reportElement x="144" y="0" width="411" height="20" uuid="d0bb5a43-a1a7-4adc-a9e5-8c24dde057e0"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{paciente_estado_civil}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="0" y="-1" width="144" height="21" backcolor="#5990BD" uuid="f800092b-0bba-43c8-bbf4-ce2f9a3463ee"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ESTADO CIVIL:]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="1" width="554" height="1" uuid="42978684-14fa-45af-8cfa-063b1a95b593"/>
+				</line>
+				<line>
+					<reportElement x="0" y="19" width="554" height="1" uuid="0a66a955-9d21-4400-8ef3-deb83124172f"/>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Ocupacion">
+		<groupExpression><![CDATA[$F{paciente_ocupacion}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField>
+					<reportElement x="144" y="0" width="411" height="20" uuid="384effcb-5ca5-4ae1-b1b9-0cf94d4462a9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{paciente_ocupacion}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="0" y="-3" width="144" height="21" backcolor="#5990BD" uuid="1e529791-db2b-4589-af86-6a8485022c55"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[OCUPACION:]]></text>
+				</staticText>
+				<line>
+					<reportElement x="1" y="19" width="554" height="1" uuid="f935a5d4-1cdc-47a6-9747-7c09e6eb0bef"/>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Religion">
+		<groupExpression><![CDATA[$F{paciente_religion}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField>
+					<reportElement x="144" y="0" width="411" height="20" uuid="b0c6929c-ea64-47f4-a522-eb500b11c295"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{paciente_religion}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="0" y="-2" width="144" height="22" backcolor="#5990BD" uuid="6efa66cb-2690-4d0d-a1e6-af445ebcc418"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[RELIGION]]></text>
+				</staticText>
+				<line>
+					<reportElement x="1" y="18" width="554" height="1" uuid="f71cb06f-6a28-4e73-b561-cf5eceff3813"/>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="usuario_acceso">
+		<groupExpression><![CDATA[$F{paciente_usuario_acceso}]]></groupExpression>
+		<groupHeader>
+			<band height="21">
+				<textField>
+					<reportElement x="144" y="0" width="411" height="20" uuid="20a40aa3-92a1-4d6a-944f-87b71a05f6ba"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{paciente_usuario_acceso}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="1" y="-1" width="143" height="21" backcolor="#5990BD" uuid="6d7fa34b-1a23-4594-929e-06dcf85e735f"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[DIGITADOR DE LA H.C.]]></text>
+				</staticText>
+				<line>
+					<reportElement x="1" y="19" width="554" height="1" uuid="1720c67b-e43d-460e-a330-cf25b44b97bd"/>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="90">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="110" backcolor="#006699" uuid="bcac198f-1dc7-4c4a-ab62-7abe8d74e970"/>
+				<staticText>
+					<reportElement x="20" y="20" width="490" height="43" forecolor="#FFFFFF" uuid="a87c6f1d-1f69-4f63-bfeb-eff525b40a95"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Reporte de Historias Clinicas]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="395" y="63" width="180" height="20" forecolor="#FFFFFF" uuid="71b56342-e723-442b-a026-462958d76cf8"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[C.M.I. Daniel Alcides Carrión]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="14511917-42aa-4a8b-a97b-d8afb585469e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="85b5b516-f383-4bfb-966d-c698b184f2a6"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="2e37a988-852e-431d-b647-10225f659315"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

@@ -34,7 +34,7 @@ public class conexion {
             link=DriverManager.getConnection(this.url, this.user, this.pass);
             
         } catch (ClassNotFoundException | SQLException e) {
-            JOptionPane.showConfirmDialog(null, e);
+            JOptionPane.showConfirmDialog(null, "ERROR DE CONEXION");
             
         }
         

@@ -21,7 +21,7 @@ public class frminicio extends javax.swing.JFrame {
         initComponents();
         lblidacceso.setVisible(false);
         this.setExtendedState(frminicio.MAXIMIZED_BOTH);
-        this.setTitle(".::SAPT/DRS SJM - VMT::.");
+        this.setTitle(".:SISTEMA DE REGISTRO - HISTORIAS CLINICAS:.");
 //        setIconImage(new ImageIcon(getClass().getResource("../Files/icodeinicio")).getImage());
     }
 
@@ -39,11 +39,11 @@ public class frminicio extends javax.swing.JFrame {
         lblacceso = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         mnusisreserva = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mnuconsultas = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         mnureservas = new javax.swing.JMenu();
         aboutMenuItem = new javax.swing.JMenuItem();
         menutrabajador = new javax.swing.JMenu();
@@ -76,11 +76,6 @@ public class frminicio extends javax.swing.JFrame {
         escritorio.add(jLabel2);
         jLabel2.setBounds(40, 30, 150, 14);
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
-        jLabel3.setText("Areá de Informática");
-        escritorio.add(jLabel3);
-        jLabel3.setBounds(50, 50, 130, 17);
-
         menuBar.setBackground(new java.awt.Color(255, 255, 255));
 
         mnusisreserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/application.png"))); // NOI18N
@@ -91,7 +86,18 @@ public class frminicio extends javax.swing.JFrame {
         menuBar.add(mnusisreserva);
 
         mnuconsultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/folder_add.png"))); // NOI18N
-        mnuconsultas.setText("Reservas");
+        mnuconsultas.setText("Reporte ");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/pagos.png"))); // NOI18N
+        jMenuItem1.setText("Historias Clinicas");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        mnuconsultas.add(jMenuItem1);
+
         menuBar.add(mnuconsultas);
 
         mnureservas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/document_edit.png"))); // NOI18N
@@ -222,6 +228,14 @@ public class frminicio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_mnusalirKeyPressed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        frmReportes form= new frmReportes();
+        escritorio.add(form);
+        form.toFront();
+        form.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -262,7 +276,7 @@ public class frminicio extends javax.swing.JFrame {
     public static javax.swing.JDesktopPane escritorio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPopupMenu.Separator jSeparator1;

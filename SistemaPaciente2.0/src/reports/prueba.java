@@ -21,8 +21,8 @@ public class prueba {
         System.out.println("Conectado");
         
         
-        Reporte_Paciente g=new Reporte_Paciente();
-        g.reportePacientes(1);
+        impHistoriaClinica g=new impHistoriaClinica();
+//        g.reportePacientes(1);
 
         } catch (Exception e) {
             System.out.println("error de prueba" + e);

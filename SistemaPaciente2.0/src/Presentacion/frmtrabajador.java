@@ -605,8 +605,8 @@ public class frmtrabajador extends javax.swing.JInternalFrame {
                 ftrabajador func = new ftrabajador();
                 vtrabajador dts = new vtrabajador();
 
-//                dts.setIdptrabajador(Integer.parseInt(txtidtrabajador.getText()));
-//                func.eliminar(dts);
+                dts.setIdtrabajador(Integer.parseInt(txtidtrabajador.getText()));
+                func.eliminar(dts);
                 mostrar("");
                 inhabilitar();
 

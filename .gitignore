@@ -23,3 +23,5 @@
 hs_err_pid*
 /bin/
 /SistemaPaciente2.0/build/
+/SistemaPaciente2.0/dist/
+/SistemaPaciente2.0_1/nbproject/private/
