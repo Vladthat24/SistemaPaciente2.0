@@ -32,9 +32,10 @@ public class fpaciente {
 
         totalregistros = 0;
         modelo = new DefaultTableModel(null, titulos);
-        
-        sSQL = "select * from paciente where num_doc like '%"+buscar+"%'"
-                + " OR apellidos like '%"+buscar+"%' order by idpaciente desc limit 50000";
+
+//        sSQL = "select * from paciente where num_doc like '%"+buscar+"%'"
+//                + " OR apellidos like '%"+buscar+"%' order by idpaciente desc limit 50000";
+        sSQL = "select * from paciente where num_doc like '%" + buscar + "%' order by idpaciente desc limit 50000";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
